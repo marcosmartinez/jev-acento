@@ -1,0 +1,29 @@
+# --- Secretos: nunca commitear ---
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# --- Texto fuente de los datasets: prohibido redistribuir (brief §6) ---
+# Solo se commitean ids, gold y hashes en data/items.parquet.
+data/cache/
+data/raw/
+*.source.jsonl
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# --- Salidas locales que no son resultados congelados ---
+.DS_Store
+reporte/
+scratch/
