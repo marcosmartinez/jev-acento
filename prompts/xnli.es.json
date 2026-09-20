@@ -1,0 +1,12 @@
+{
+  "dataset": "xnli",
+  "lang": "es",
+  "question_id": "nli",
+  "type": "choice",
+  "instructions": "La `premise` es una afirmación que se toma como verdadera. Se la debe leer junto con la `hypothesis`. Determinar qué establece la `premise` respecto de la `hypothesis`.",
+  "criteria": {
+    "entailment": "La `hypothesis` tiene que ser verdadera siempre que la `premise` lo sea.",
+    "neutral": "La `premise` no garantiza ni descarta la `hypothesis`; podría ser verdadera o falsa.",
+    "contradiction": "La `hypothesis` no puede ser verdadera si la `premise` lo es."
+  }
+}

@@ -1,0 +1,64 @@
+[project]
+name = "jev-acento"
+version = "0.1.0.dev0"
+description = "Auditoría reproducible de Jev (TypeSafe AI) en español: ¿cuánto cuesta el idioma, y en qué idioma conviene escribir las instrucciones?"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { file = "LICENSE" }
+authors = [{ name = "Marcos Martinez" }]
+keywords = ["jev", "typesafe", "calibration", "spanish", "nlp", "audit"]
+
+dependencies = [
+    "httpx>=0.27",
+    "datasets>=2.19",
+    "pyarrow>=16",
+    "numpy>=1.26",
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "netcal>=1.3",   # solo para cross-check de ECE contra nuestra implementación
+    "ruff>=0.5",
+]
+
+[project.scripts]
+acento = "jev_acento.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/jev_acento"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+# Pinned explicitly so `make lint` gives the same result on any clone, regardless of the
+# reviewer's ruff version or global config.
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
+ignore = [
+    # The report builders assemble Markdown as lists of long strings. Implicit concatenation is
+    # the readable way to write those, and parenthesising every one hurts more than it helps.
+    "ISC001",
+    "ISC004",
+    # Long lines inside docstrings and prose tables are intentional.
+    "E501",
+    # The generated reports are read by people, so they use real typographic characters
+    # (x for ratios, - for minus). That is deliberate, not a homoglyph mistake.
+    "RUF001",
+    "RUF002",
+    "RUF003",
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Tests reach into private helpers on purpose to exercise a single cell in isolation.
+"tests/*" = ["SLF001"]

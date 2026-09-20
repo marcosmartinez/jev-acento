@@ -1,0 +1,22 @@
+{
+  "name": "en",
+  "questions": {
+    "urgency": {
+      "type": "choice",
+      "instructions": "Read `ticket_text`. How quickly does this ticket need a human response?",
+      "criteria": {
+        "low": "A routine question or comment. Answering within a few days is fine.",
+        "medium": "Something is not working as expected, but the customer can still use the product.",
+        "high": "The customer is blocked, is losing money, or is threatening to leave."
+      }
+    },
+    "is_complaint": {
+      "type": "noul",
+      "instructions": "Read `ticket_text`. Is the customer expressing dissatisfaction with the product or the service?",
+      "criteria": {
+        "true": "The customer is reporting a problem or expressing frustration.",
+        "false": "The customer is asking a question, making a request, or giving neutral or positive feedback."
+      }
+    }
+  }
+}

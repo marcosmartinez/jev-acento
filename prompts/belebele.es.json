@@ -1,0 +1,13 @@
+{
+  "dataset": "belebele",
+  "lang": "es",
+  "question_id": "reading",
+  "type": "choice",
+  "instructions": "Leer el `passage` y después la `question` que trata sobre él. Se ofrecen cuatro respuestas candidatas en `option_1`, `option_2`, `option_3` y `option_4`. Seleccionar la candidata que el `passage` respalda como respuesta a la `question`.",
+  "criteria": {
+    "option_1": "El texto de `option_1` responde correctamente la `question`.",
+    "option_2": "El texto de `option_2` responde correctamente la `question`.",
+    "option_3": "El texto de `option_3` responde correctamente la `question`.",
+    "option_4": "El texto de `option_4` responde correctamente la `question`."
+  }
+}

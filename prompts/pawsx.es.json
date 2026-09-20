@@ -1,0 +1,11 @@
+{
+  "dataset": "pawsx",
+  "lang": "es",
+  "question_id": "paraphrase",
+  "type": "noul",
+  "instructions": "Comparar `sentence_1` con `sentence_2`. ¿Afirman exactamente los mismos hechos, de modo que cualquiera de las dos podría reemplazar a la otra sin cambiar lo que se afirma?",
+  "criteria": {
+    "true": "Las dos oraciones afirman los mismos hechos, sin diferencias en quién hizo qué a quién.",
+    "false": "Las dos oraciones difieren en al menos un hecho afirmado, como un intercambio de roles, una cantidad distinta o una entidad diferente."
+  }
+}

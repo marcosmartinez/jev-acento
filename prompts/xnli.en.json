@@ -1,0 +1,12 @@
+{
+  "dataset": "xnli",
+  "lang": "en",
+  "question_id": "nli",
+  "type": "choice",
+  "instructions": "The `premise` is a statement that is taken to be true. Read it together with the `hypothesis`. Decide what the `premise` establishes about the `hypothesis`.",
+  "criteria": {
+    "entailment": "The `hypothesis` must be true whenever the `premise` is true.",
+    "neutral": "The `premise` neither guarantees nor rules out the `hypothesis`; it could be either true or false.",
+    "contradiction": "The `hypothesis` cannot be true if the `premise` is true."
+  }
+}

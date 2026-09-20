@@ -1,0 +1,11 @@
+{
+  "dataset": "pawsx",
+  "lang": "en",
+  "question_id": "paraphrase",
+  "type": "noul",
+  "instructions": "Compare `sentence_1` and `sentence_2`. Do they state exactly the same facts, such that either sentence could replace the other without changing what is asserted?",
+  "criteria": {
+    "true": "The two sentences assert the same facts, with no difference in who did what to whom.",
+    "false": "The two sentences differ in at least one asserted fact, such as a swapped role, a changed quantity, or a different entity."
+  }
+}

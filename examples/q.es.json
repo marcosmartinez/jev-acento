@@ -1,0 +1,22 @@
+{
+  "name": "es",
+  "questions": {
+    "urgency": {
+      "type": "choice",
+      "instructions": "Leer `ticket_text`. ¿Con qué urgencia necesita este ticket una respuesta humana?",
+      "criteria": {
+        "low": "Una consulta o comentario de rutina. Responder en unos días es suficiente.",
+        "medium": "Algo no funciona como se espera, pero el cliente todavía puede usar el producto.",
+        "high": "El cliente está bloqueado, está perdiendo dinero, o amenaza con irse."
+      }
+    },
+    "is_complaint": {
+      "type": "noul",
+      "instructions": "Leer `ticket_text`. ¿El cliente está expresando insatisfacción con el producto o el servicio?",
+      "criteria": {
+        "true": "El cliente reporta un problema o expresa frustración.",
+        "false": "El cliente hace una consulta, un pedido, o da una devolución neutra o positiva."
+      }
+    }
+  }
+}

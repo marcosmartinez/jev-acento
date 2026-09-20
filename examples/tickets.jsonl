@@ -1,0 +1,30 @@
+{"id": "ticket-001", "state": {"ticket_text": "Me cobraron dos veces la suscripción de este mes. Necesito el reembolso ya.", "channel": "email"}, "gold": {"urgency": "high", "is_complaint": "true"}}
+{"id": "ticket-002", "state": {"ticket_text": "Hola, quería saber si tienen plan anual.", "channel": "email"}, "gold": {"urgency": "low", "is_complaint": "false"}}
+{"id": "ticket-003", "state": {"ticket_text": "La app se cierra sola cada vez que abro el historial. No puedo trabajar.", "channel": "email"}, "gold": {"urgency": "high", "is_complaint": "true"}}
+{"id": "ticket-004", "state": {"ticket_text": "¿Cómo cambio mi contraseña?", "channel": "email"}, "gold": {"urgency": "low", "is_complaint": "false"}}
+{"id": "ticket-005", "state": {"ticket_text": "Llevo tres días sin poder acceder y nadie me responde. Esto es inaceptable.", "channel": "email"}, "gold": {"urgency": "high", "is_complaint": "true"}}
+{"id": "ticket-006", "state": {"ticket_text": "Gracias por la ayuda de ayer, quedó resuelto.", "channel": "email"}, "gold": {"urgency": "low", "is_complaint": "false"}}
+{"id": "ticket-007", "state": {"ticket_text": "El informe mensual llegó incompleto, faltan las últimas dos semanas.", "channel": "email"}, "gold": {"urgency": "medium", "is_complaint": "true"}}
+{"id": "ticket-008", "state": {"ticket_text": "Quisiera agregar dos usuarios más a mi cuenta.", "channel": "email"}, "gold": {"urgency": "low", "is_complaint": "false"}}
+{"id": "ticket-009", "state": {"ticket_text": "Me facturaron un plan que cancelé en marzo. Adjunto el comprobante.", "channel": "email"}, "gold": {"urgency": "high", "is_complaint": "true"}}
+{"id": "ticket-010", "state": {"ticket_text": "¿El soporte atiende los fines de semana?", "channel": "email"}, "gold": {"urgency": "low", "is_complaint": "false"}}
+{"id": "ticket-011", "state": {"ticket_text": "La exportación a CSV tarda muchísimo, antes era instantánea.", "channel": "email"}, "gold": {"urgency": "medium", "is_complaint": "true"}}
+{"id": "ticket-012", "state": {"ticket_text": "Necesito una factura A en lugar de la B que me enviaron.", "channel": "email"}, "gold": {"urgency": "medium", "is_complaint": "false"}}
+{"id": "ticket-013", "state": {"ticket_text": "Perdí todos los datos del proyecto después de la actualización.", "channel": "email"}, "gold": {"urgency": "high", "is_complaint": "true"}}
+{"id": "ticket-014", "state": {"ticket_text": "¿Tienen integración con Slack?", "channel": "email"}, "gold": {"urgency": "low", "is_complaint": "false"}}
+{"id": "ticket-015", "state": {"ticket_text": "El botón de guardar no funciona en Safari, en Chrome sí.", "channel": "email"}, "gold": {"urgency": "medium", "is_complaint": "true"}}
+{"id": "ticket-016", "state": {"ticket_text": "Quiero dar de baja mi cuenta, gracias.", "channel": "email"}, "gold": {"urgency": "medium", "is_complaint": "false"}}
+{"id": "ticket-017", "state": {"ticket_text": "Hace una semana que reporté el error y sigue igual. Voy a cancelar.", "channel": "email"}, "gold": {"urgency": "high", "is_complaint": "true"}}
+{"id": "ticket-018", "state": {"ticket_text": "¿Puedo cambiar el correo asociado a la cuenta?", "channel": "email"}, "gold": {"urgency": "low", "is_complaint": "false"}}
+{"id": "ticket-019", "state": {"ticket_text": "Los gráficos del panel muestran números que no coinciden con el reporte.", "channel": "email"}, "gold": {"urgency": "medium", "is_complaint": "true"}}
+{"id": "ticket-020", "state": {"ticket_text": "Consulta: ¿el plan básico incluye la API?", "channel": "email"}, "gold": {"urgency": "low", "is_complaint": "false"}}
+{"id": "ticket-021", "state": {"ticket_text": "Me llegó un cargo de 400 dólares sin explicación. Quiero hablar con alguien ya.", "channel": "email"}, "gold": {"urgency": "high", "is_complaint": "true"}}
+{"id": "ticket-022", "state": {"ticket_text": "Sugerencia: estaría bueno poder filtrar por fecha en el listado.", "channel": "email"}, "gold": {"urgency": "low", "is_complaint": "false"}}
+{"id": "ticket-023", "state": {"ticket_text": "La notificación por correo llega duplicada cada vez.", "channel": "email"}, "gold": {"urgency": "medium", "is_complaint": "true"}}
+{"id": "ticket-024", "state": {"ticket_text": "¿Dónde veo el historial de pagos?", "channel": "email"}, "gold": {"urgency": "low", "is_complaint": "false"}}
+{"id": "ticket-025", "state": {"ticket_text": "El sistema rechaza mi tarjeta y ya probé con tres distintas.", "channel": "email"}, "gold": {"urgency": "high", "is_complaint": "true"}}
+{"id": "ticket-026", "state": {"ticket_text": "Quiero cambiar de plan mensual a anual, ¿cómo hago?", "channel": "email"}, "gold": {"urgency": "low", "is_complaint": "false"}}
+{"id": "ticket-027", "state": {"ticket_text": "Los permisos de mi equipo se resetearon solos, ahora nadie puede editar.", "channel": "email"}, "gold": {"urgency": "high", "is_complaint": "true"}}
+{"id": "ticket-028", "state": {"ticket_text": "¿Ofrecen descuento para organizaciones sin fines de lucro?", "channel": "email"}, "gold": {"urgency": "low", "is_complaint": "false"}}
+{"id": "ticket-029", "state": {"ticket_text": "El buscador no encuentra documentos que sé que existen.", "channel": "email"}, "gold": {"urgency": "medium", "is_complaint": "true"}}
+{"id": "ticket-030", "state": {"ticket_text": "Todo funcionando bien, solo quería confirmar la renovación.", "channel": "email"}, "gold": {"urgency": "low", "is_complaint": "false"}}
