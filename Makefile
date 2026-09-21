@@ -31,8 +31,9 @@ help:
 	@echo "scan-secrets  check the whole git history for keys and source text"
 	@echo "clean         remove dry-run artefacts and caches"
 
+# Idempotent: `verify` depends on this, so it has to be safe to run against an existing venv.
 install:
-	uv venv --python 3.12
+	uv venv --python 3.12 --allow-existing
 	uv pip install -e ".[dev]"
 
 test:

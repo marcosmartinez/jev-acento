@@ -206,6 +206,7 @@ make test           # metrics on synthetic data, runner against the fake API, fr
 make dry-run        # full pipeline, no network, no spend
 make run            # the real thing (~19k calls, ~USD 0.50, ~35 min)
 make reproduce      # regenerate results.* and figures/ deterministically from runs/
+make verify         # the full pre-publication gate: freeze, tests, secret scan, reproducibility
 ```
 
 ## Limitations

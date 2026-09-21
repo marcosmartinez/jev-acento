@@ -205,6 +205,7 @@ make test           # métricas sobre datos sintéticos, runner contra la API fa
 make dry-run        # pipeline completo, sin red y sin gasto
 make run            # la corrida real (~19k llamadas, ~USD 0,50, ~35 min)
 make reproduce      # regenerar results.* y figures/ de forma determinística desde runs/
+make verify         # el gate completo: freeze, tests, scan de secretos, reproducibilidad
 ```
 
 ## Limitaciones
