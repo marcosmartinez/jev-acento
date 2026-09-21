@@ -1,0 +1,1728 @@
+{
+  "arms": [
+    {
+      "accuracy": {
+        "hi": 0.9916666666666667,
+        "lo": 0.97,
+        "point": 0.9816666666666667
+      },
+      "arm": "A",
+      "aurc": 0.002162271298750887,
+      "bins": [
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.1,
+          "lo": 0.0,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.2,
+          "lo": 0.1,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.30000000000000004,
+          "lo": 0.2,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.4,
+          "lo": 0.30000000000000004,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": 1.0,
+          "count": 2,
+          "hi": 0.5,
+          "lo": 0.4,
+          "mean_confidence": 0.45999999999999996
+        },
+        {
+          "accuracy": 0.6,
+          "count": 5,
+          "hi": 0.6000000000000001,
+          "lo": 0.5,
+          "mean_confidence": 0.5479999999999999
+        },
+        {
+          "accuracy": 0.75,
+          "count": 4,
+          "hi": 0.7000000000000001,
+          "lo": 0.6000000000000001,
+          "mean_confidence": 0.655
+        },
+        {
+          "accuracy": 0.875,
+          "count": 8,
+          "hi": 0.8,
+          "lo": 0.7000000000000001,
+          "mean_confidence": 0.7637499999999999
+        },
+        {
+          "accuracy": 0.9285714285714286,
+          "count": 14,
+          "hi": 0.9,
+          "lo": 0.8,
+          "mean_confidence": 0.8607142857142857
+        },
+        {
+          "accuracy": 0.9894179894179894,
+          "count": 567,
+          "hi": 1.0,
+          "lo": 0.9,
+          "mean_confidence": 0.9969664902998235
+        }
+      ],
+      "coverage": [
+        {
+          "accuracy": 0.9816053511705686,
+          "coverage": 0.9966666666666667,
+          "n_covered": 598,
+          "threshold": 0.5
+        },
+        {
+          "accuracy": 0.9894179894179894,
+          "coverage": 0.945,
+          "n_covered": 567,
+          "threshold": 0.9
+        }
+      ],
+      "dataset": "belebele",
+      "ece": 0.01306666666666658,
+      "ece_floor": 0.008640466666666654,
+      "ece_ratio": 1.5122639980865153,
+      "latency_p50": 344.25,
+      "latency_p95": 534.0074999999997,
+      "macro_f1": {
+        "hi": 0.9909486844959046,
+        "lo": 0.969689716535523,
+        "point": 0.9811312572458446
+      },
+      "mean_input_tokens": 640.275,
+      "n": 600,
+      "n_choice_disagrees": 0
+    },
+    {
+      "accuracy": {
+        "hi": 0.9683333333333334,
+        "lo": 0.9333333333333333,
+        "point": 0.9516666666666667
+      },
+      "arm": "B",
+      "aurc": 0.006642039676960725,
+      "bins": [
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.1,
+          "lo": 0.0,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.2,
+          "lo": 0.1,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.30000000000000004,
+          "lo": 0.2,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": 0.0,
+          "count": 1,
+          "hi": 0.4,
+          "lo": 0.30000000000000004,
+          "mean_confidence": 0.38
+        },
+        {
+          "accuracy": 0.5,
+          "count": 2,
+          "hi": 0.5,
+          "lo": 0.4,
+          "mean_confidence": 0.45499999999999996
+        },
+        {
+          "accuracy": 0.5,
+          "count": 6,
+          "hi": 0.6000000000000001,
+          "lo": 0.5,
+          "mean_confidence": 0.5466666666666667
+        },
+        {
+          "accuracy": 0.3333333333333333,
+          "count": 9,
+          "hi": 0.7000000000000001,
+          "lo": 0.6000000000000001,
+          "mean_confidence": 0.6422222222222221
+        },
+        {
+          "accuracy": 0.625,
+          "count": 8,
+          "hi": 0.8,
+          "lo": 0.7000000000000001,
+          "mean_confidence": 0.75
+        },
+        {
+          "accuracy": 0.7894736842105263,
+          "count": 19,
+          "hi": 0.9,
+          "lo": 0.8,
+          "mean_confidence": 0.8473684210526317
+        },
+        {
+          "accuracy": 0.9801801801801802,
+          "count": 555,
+          "hi": 1.0,
+          "lo": 0.9,
+          "mean_confidence": 0.9945765765765766
+        }
+      ],
+      "coverage": [
+        {
+          "accuracy": 0.9547738693467337,
+          "coverage": 0.995,
+          "n_covered": 597,
+          "threshold": 0.5
+        },
+        {
+          "accuracy": 0.9801801801801802,
+          "coverage": 0.925,
+          "n_covered": 555,
+          "threshold": 0.9
+        }
+      ],
+      "dataset": "belebele",
+      "ece": 0.022700000000000053,
+      "ece_floor": 0.011021900000000024,
+      "ece_ratio": 2.0595360146617194,
+      "latency_p50": 376.7,
+      "latency_p95": 577.482,
+      "macro_f1": {
+        "hi": 0.9669627402204541,
+        "lo": 0.9337928789004718,
+        "point": 0.9509189711329231
+      },
+      "mean_input_tokens": 692.6016666666667,
+      "n": 600,
+      "n_choice_disagrees": 0
+    },
+    {
+      "accuracy": {
+        "hi": 0.9733333333333334,
+        "lo": 0.9383333333333334,
+        "point": 0.9566666666666667
+      },
+      "arm": "C",
+      "aurc": 0.008550047754731388,
+      "bins": [
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.1,
+          "lo": 0.0,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.2,
+          "lo": 0.1,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.30000000000000004,
+          "lo": 0.2,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": 1.0,
+          "count": 1,
+          "hi": 0.4,
+          "lo": 0.30000000000000004,
+          "mean_confidence": 0.34
+        },
+        {
+          "accuracy": 1.0,
+          "count": 2,
+          "hi": 0.5,
+          "lo": 0.4,
+          "mean_confidence": 0.44
+        },
+        {
+          "accuracy": 0.4444444444444444,
+          "count": 9,
+          "hi": 0.6000000000000001,
+          "lo": 0.5,
+          "mean_confidence": 0.5522222222222222
+        },
+        {
+          "accuracy": 0.5714285714285714,
+          "count": 7,
+          "hi": 0.7000000000000001,
+          "lo": 0.6000000000000001,
+          "mean_confidence": 0.6328571428571428
+        },
+        {
+          "accuracy": 0.5714285714285714,
+          "count": 7,
+          "hi": 0.8,
+          "lo": 0.7000000000000001,
+          "mean_confidence": 0.7585714285714286
+        },
+        {
+          "accuracy": 0.8095238095238095,
+          "count": 21,
+          "hi": 0.9,
+          "lo": 0.8,
+          "mean_confidence": 0.8533333333333334
+        },
+        {
+          "accuracy": 0.9801084990958409,
+          "count": 553,
+          "hi": 1.0,
+          "lo": 0.9,
+          "mean_confidence": 0.9950813743218806
+        }
+      ],
+      "coverage": [
+        {
+          "accuracy": 0.9564489112227805,
+          "coverage": 0.995,
+          "n_covered": 597,
+          "threshold": 0.5
+        },
+        {
+          "accuracy": 0.9801084990958409,
+          "coverage": 0.9216666666666666,
+          "n_covered": 553,
+          "threshold": 0.9
+        }
+      ],
+      "dataset": "belebele",
+      "ece": 0.022816666666666627,
+      "ece_floor": 0.01116213333333334,
+      "ece_ratio": 2.0441134311242726,
+      "latency_p50": 394.385,
+      "latency_p95": 567.881,
+      "macro_f1": {
+        "hi": 0.9717433744847253,
+        "lo": 0.9401100050352915,
+        "point": 0.9557601081387419
+      },
+      "mean_input_tokens": 690.6016666666667,
+      "n": 600,
+      "n_choice_disagrees": 1
+    },
+    {
+      "accuracy": {
+        "hi": 0.8733333333333333,
+        "lo": 0.815,
+        "point": 0.845
+      },
+      "arm": "A",
+      "aurc": 0.050500636257931324,
+      "bins": [
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.1,
+          "lo": 0.0,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.2,
+          "lo": 0.1,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": 0.0,
+          "count": 2,
+          "hi": 0.30000000000000004,
+          "lo": 0.2,
+          "mean_confidence": 0.28
+        },
+        {
+          "accuracy": 0.0,
+          "count": 3,
+          "hi": 0.4,
+          "lo": 0.30000000000000004,
+          "mean_confidence": 0.37000000000000005
+        },
+        {
+          "accuracy": 0.2857142857142857,
+          "count": 7,
+          "hi": 0.5,
+          "lo": 0.4,
+          "mean_confidence": 0.44428571428571434
+        },
+        {
+          "accuracy": 0.4,
+          "count": 25,
+          "hi": 0.6000000000000001,
+          "lo": 0.5,
+          "mean_confidence": 0.5519999999999999
+        },
+        {
+          "accuracy": 0.44,
+          "count": 25,
+          "hi": 0.7000000000000001,
+          "lo": 0.6000000000000001,
+          "mean_confidence": 0.6396000000000001
+        },
+        {
+          "accuracy": 0.6190476190476191,
+          "count": 21,
+          "hi": 0.8,
+          "lo": 0.7000000000000001,
+          "mean_confidence": 0.7561904761904762
+        },
+        {
+          "accuracy": 0.6153846153846154,
+          "count": 39,
+          "hi": 0.9,
+          "lo": 0.8,
+          "mean_confidence": 0.8456410256410257
+        },
+        {
+          "accuracy": 0.9351464435146444,
+          "count": 478,
+          "hi": 1.0,
+          "lo": 0.9,
+          "mean_confidence": 0.9923221757322177
+        }
+      ],
+      "coverage": [
+        {
+          "accuracy": 0.858843537414966,
+          "coverage": 0.98,
+          "n_covered": 588,
+          "threshold": 0.5
+        },
+        {
+          "accuracy": 0.9351464435146444,
+          "coverage": 0.7966666666666666,
+          "n_covered": 478,
+          "threshold": 0.9
+        }
+      ],
+      "dataset": "massive",
+      "ece": 0.08460000000000009,
+      "ece_floor": 0.018467566666666668,
+      "ece_ratio": 4.581004174886789,
+      "latency_p50": 472.295,
+      "latency_p95": 569.526,
+      "macro_f1": {
+        "hi": 0.8484970206699489,
+        "lo": 0.7534456608442894,
+        "point": 0.8358834462367595
+      },
+      "mean_input_tokens": 1591.4116666666666,
+      "n": 600,
+      "n_choice_disagrees": 0
+    },
+    {
+      "accuracy": {
+        "hi": 0.8383333333333334,
+        "lo": 0.7766666666666666,
+        "point": 0.8083333333333333
+      },
+      "arm": "B",
+      "aurc": 0.07868126539313275,
+      "bins": [
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.1,
+          "lo": 0.0,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.2,
+          "lo": 0.1,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": 0.0,
+          "count": 1,
+          "hi": 0.30000000000000004,
+          "lo": 0.2,
+          "mean_confidence": 0.26
+        },
+        {
+          "accuracy": 0.0,
+          "count": 5,
+          "hi": 0.4,
+          "lo": 0.30000000000000004,
+          "mean_confidence": 0.34400000000000003
+        },
+        {
+          "accuracy": 0.5833333333333334,
+          "count": 12,
+          "hi": 0.5,
+          "lo": 0.4,
+          "mean_confidence": 0.44333333333333336
+        },
+        {
+          "accuracy": 0.34210526315789475,
+          "count": 38,
+          "hi": 0.6000000000000001,
+          "lo": 0.5,
+          "mean_confidence": 0.5463157894736842
+        },
+        {
+          "accuracy": 0.6129032258064516,
+          "count": 31,
+          "hi": 0.7000000000000001,
+          "lo": 0.6000000000000001,
+          "mean_confidence": 0.6516129032258066
+        },
+        {
+          "accuracy": 0.6857142857142857,
+          "count": 35,
+          "hi": 0.8,
+          "lo": 0.7000000000000001,
+          "mean_confidence": 0.7477142857142858
+        },
+        {
+          "accuracy": 0.5961538461538461,
+          "count": 52,
+          "hi": 0.9,
+          "lo": 0.8,
+          "mean_confidence": 0.849423076923077
+        },
+        {
+          "accuracy": 0.9178403755868545,
+          "count": 426,
+          "hi": 1.0,
+          "lo": 0.9,
+          "mean_confidence": 0.9896009389671361
+        }
+      ],
+      "coverage": [
+        {
+          "accuracy": 0.8213058419243986,
+          "coverage": 0.97,
+          "n_covered": 582,
+          "threshold": 0.5
+        },
+        {
+          "accuracy": 0.9178403755868545,
+          "coverage": 0.71,
+          "n_covered": 426,
+          "threshold": 0.9
+        }
+      ],
+      "dataset": "massive",
+      "ece": 0.09754999999999994,
+      "ece_floor": 0.021246400000000002,
+      "ece_ratio": 4.591366066721888,
+      "latency_p50": 481.78,
+      "latency_p95": 596.4639999999998,
+      "macro_f1": {
+        "hi": 0.8135119119957247,
+        "lo": 0.7119543732449849,
+        "point": 0.8017489900869127
+      },
+      "mean_input_tokens": 1593.3566666666666,
+      "n": 600,
+      "n_choice_disagrees": 0
+    },
+    {
+      "accuracy": {
+        "hi": 0.8333333333333334,
+        "lo": 0.77,
+        "point": 0.8016666666666666
+      },
+      "arm": "C",
+      "aurc": 0.08439080405261519,
+      "bins": [
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.1,
+          "lo": 0.0,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.2,
+          "lo": 0.1,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": 0.0,
+          "count": 2,
+          "hi": 0.30000000000000004,
+          "lo": 0.2,
+          "mean_confidence": 0.275
+        },
+        {
+          "accuracy": 0.5,
+          "count": 2,
+          "hi": 0.4,
+          "lo": 0.30000000000000004,
+          "mean_confidence": 0.39
+        },
+        {
+          "accuracy": 0.23809523809523808,
+          "count": 21,
+          "hi": 0.5,
+          "lo": 0.4,
+          "mean_confidence": 0.4571428571428572
+        },
+        {
+          "accuracy": 0.5517241379310345,
+          "count": 29,
+          "hi": 0.6000000000000001,
+          "lo": 0.5,
+          "mean_confidence": 0.5396551724137931
+        },
+        {
+          "accuracy": 0.5945945945945946,
+          "count": 37,
+          "hi": 0.7000000000000001,
+          "lo": 0.6000000000000001,
+          "mean_confidence": 0.6470270270270272
+        },
+        {
+          "accuracy": 0.6571428571428571,
+          "count": 35,
+          "hi": 0.8,
+          "lo": 0.7000000000000001,
+          "mean_confidence": 0.742
+        },
+        {
+          "accuracy": 0.5192307692307693,
+          "count": 52,
+          "hi": 0.9,
+          "lo": 0.8,
+          "mean_confidence": 0.8428846153846152
+        },
+        {
+          "accuracy": 0.9170616113744076,
+          "count": 422,
+          "hi": 1.0,
+          "lo": 0.9,
+          "mean_confidence": 0.9888388625592418
+        }
+      ],
+      "coverage": [
+        {
+          "accuracy": 0.8260869565217391,
+          "coverage": 0.9583333333333334,
+          "n_covered": 575,
+          "threshold": 0.5
+        },
+        {
+          "accuracy": 0.9170616113744076,
+          "coverage": 0.7033333333333334,
+          "n_covered": 422,
+          "threshold": 0.9
+        }
+      ],
+      "dataset": "massive",
+      "ece": 0.09625000000000009,
+      "ece_floor": 0.022016833333333333,
+      "ece_ratio": 4.371655021536555,
+      "latency_p50": 476.38,
+      "latency_p95": 595.7985,
+      "macro_f1": {
+        "hi": 0.8255469551427183,
+        "lo": 0.7230064265865435,
+        "point": 0.8143173189580538
+      },
+      "mean_input_tokens": 1692.3566666666666,
+      "n": 600,
+      "n_choice_disagrees": 1
+    },
+    {
+      "accuracy": {
+        "hi": 0.857,
+        "lo": 0.811,
+        "point": 0.834
+      },
+      "arm": "A",
+      "aurc": 0.053839301633550975,
+      "bins": [
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.1,
+          "lo": 0.0,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.2,
+          "lo": 0.1,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.30000000000000004,
+          "lo": 0.2,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.4,
+          "lo": 0.30000000000000004,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.5,
+          "lo": 0.4,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": 0.4880952380952381,
+          "count": 84,
+          "hi": 0.6000000000000001,
+          "lo": 0.5,
+          "mean_confidence": 0.5479761904761905
+        },
+        {
+          "accuracy": 0.6111111111111112,
+          "count": 72,
+          "hi": 0.7000000000000001,
+          "lo": 0.6000000000000001,
+          "mean_confidence": 0.6401388888888889
+        },
+        {
+          "accuracy": 0.6851851851851852,
+          "count": 108,
+          "hi": 0.8,
+          "lo": 0.7000000000000001,
+          "mean_confidence": 0.7474999999999999
+        },
+        {
+          "accuracy": 0.8309859154929577,
+          "count": 142,
+          "hi": 0.9,
+          "lo": 0.8,
+          "mean_confidence": 0.8513380281690139
+        },
+        {
+          "accuracy": 0.9377104377104377,
+          "count": 594,
+          "hi": 1.0,
+          "lo": 0.9,
+          "mean_confidence": 0.9646464646464646
+        }
+      ],
+      "coverage": [
+        {
+          "accuracy": 0.834,
+          "coverage": 1.0,
+          "n_covered": 1000,
+          "threshold": 0.5
+        },
+        {
+          "accuracy": 0.9377104377104377,
+          "coverage": 0.594,
+          "n_covered": 594,
+          "threshold": 0.9
+        }
+      ],
+      "dataset": "pawsx",
+      "ece": 0.032739999999999964,
+      "ece_floor": 0.017296100000000005,
+      "ece_ratio": 1.892912275021534,
+      "latency_p50": 326.63,
+      "latency_p95": 519.6905,
+      "macro_f1": {
+        "hi": 0.8532119547126544,
+        "lo": 0.8068185485311137,
+        "point": 0.8299675094542163
+      },
+      "mean_input_tokens": 433.772,
+      "n": 1000,
+      "n_choice_disagrees": 0
+    },
+    {
+      "accuracy": {
+        "hi": 0.797025,
+        "lo": 0.745,
+        "point": 0.772
+      },
+      "arm": "B",
+      "aurc": 0.08742300100019076,
+      "bins": [
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.1,
+          "lo": 0.0,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.2,
+          "lo": 0.1,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.30000000000000004,
+          "lo": 0.2,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.4,
+          "lo": 0.30000000000000004,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.5,
+          "lo": 0.4,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": 0.44329896907216493,
+          "count": 97,
+          "hi": 0.6000000000000001,
+          "lo": 0.5,
+          "mean_confidence": 0.5501030927835051
+        },
+        {
+          "accuracy": 0.6105263157894737,
+          "count": 95,
+          "hi": 0.7000000000000001,
+          "lo": 0.6000000000000001,
+          "mean_confidence": 0.6467368421052632
+        },
+        {
+          "accuracy": 0.6036036036036037,
+          "count": 111,
+          "hi": 0.8,
+          "lo": 0.7000000000000001,
+          "mean_confidence": 0.7476576576576579
+        },
+        {
+          "accuracy": 0.7160493827160493,
+          "count": 162,
+          "hi": 0.9,
+          "lo": 0.8,
+          "mean_confidence": 0.8509259259259261
+        },
+        {
+          "accuracy": 0.9121495327102803,
+          "count": 535,
+          "hi": 1.0,
+          "lo": 0.9,
+          "mean_confidence": 0.9619252336448598
+        }
+      ],
+      "coverage": [
+        {
+          "accuracy": 0.772,
+          "coverage": 1.0,
+          "n_covered": 1000,
+          "threshold": 0.5
+        },
+        {
+          "accuracy": 0.9121495327102803,
+          "coverage": 0.535,
+          "n_covered": 535,
+          "threshold": 0.9
+        }
+      ],
+      "dataset": "pawsx",
+      "ece": 0.07827000000000009,
+      "ece_floor": 0.018562900000000004,
+      "ece_ratio": 4.216474796502705,
+      "latency_p50": 327.86,
+      "latency_p95": 529.6365,
+      "macro_f1": {
+        "hi": 0.7910754143152905,
+        "lo": 0.7378295044029288,
+        "point": 0.7638294434247217
+      },
+      "mean_input_tokens": 443.229,
+      "n": 1000,
+      "n_choice_disagrees": 0
+    },
+    {
+      "accuracy": {
+        "hi": 0.815,
+        "lo": 0.762,
+        "point": 0.788
+      },
+      "arm": "C",
+      "aurc": 0.08535179338858988,
+      "bins": [
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.1,
+          "lo": 0.0,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.2,
+          "lo": 0.1,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.30000000000000004,
+          "lo": 0.2,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.4,
+          "lo": 0.30000000000000004,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.5,
+          "lo": 0.4,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": 0.5204081632653061,
+          "count": 98,
+          "hi": 0.6000000000000001,
+          "lo": 0.5,
+          "mean_confidence": 0.5438775510204082
+        },
+        {
+          "accuracy": 0.6333333333333333,
+          "count": 90,
+          "hi": 0.7000000000000001,
+          "lo": 0.6000000000000001,
+          "mean_confidence": 0.6415555555555555
+        },
+        {
+          "accuracy": 0.6611570247933884,
+          "count": 121,
+          "hi": 0.8,
+          "lo": 0.7000000000000001,
+          "mean_confidence": 0.7432231404958677
+        },
+        {
+          "accuracy": 0.7086092715231788,
+          "count": 151,
+          "hi": 0.9,
+          "lo": 0.8,
+          "mean_confidence": 0.8497350993377484
+        },
+        {
+          "accuracy": 0.912962962962963,
+          "count": 540,
+          "hi": 1.0,
+          "lo": 0.9,
+          "mean_confidence": 0.9623703703703705
+        }
+      ],
+      "coverage": [
+        {
+          "accuracy": 0.788,
+          "coverage": 1.0,
+          "n_covered": 1000,
+          "threshold": 0.5
+        },
+        {
+          "accuracy": 0.912962962962963,
+          "coverage": 0.54,
+          "n_covered": 540,
+          "threshold": 0.9
+        }
+      ],
+      "dataset": "pawsx",
+      "ece": 0.0609600000000001,
+      "ece_floor": 0.018296059999999992,
+      "ece_ratio": 3.3318648933158355,
+      "latency_p50": 328.345,
+      "latency_p95": 532.0259999999997,
+      "macro_f1": {
+        "hi": 0.8083982438075747,
+        "lo": 0.7551508996205364,
+        "point": 0.7813810940020047
+      },
+      "mean_input_tokens": 460.229,
+      "n": 1000,
+      "n_choice_disagrees": 0
+    },
+    {
+      "accuracy": {
+        "hi": 0.872,
+        "lo": 0.8299749999999999,
+        "point": 0.85
+      },
+      "arm": "A",
+      "aurc": 0.052761243638743745,
+      "bins": [
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.1,
+          "lo": 0.0,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.2,
+          "lo": 0.1,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.30000000000000004,
+          "lo": 0.2,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.4,
+          "lo": 0.30000000000000004,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": 0.4,
+          "count": 5,
+          "hi": 0.5,
+          "lo": 0.4,
+          "mean_confidence": 0.46799999999999997
+        },
+        {
+          "accuracy": 0.5384615384615384,
+          "count": 52,
+          "hi": 0.6000000000000001,
+          "lo": 0.5,
+          "mean_confidence": 0.5444230769230769
+        },
+        {
+          "accuracy": 0.46774193548387094,
+          "count": 62,
+          "hi": 0.7000000000000001,
+          "lo": 0.6000000000000001,
+          "mean_confidence": 0.6403225806451612
+        },
+        {
+          "accuracy": 0.6944444444444444,
+          "count": 72,
+          "hi": 0.8,
+          "lo": 0.7000000000000001,
+          "mean_confidence": 0.7472222222222222
+        },
+        {
+          "accuracy": 0.735632183908046,
+          "count": 87,
+          "hi": 0.9,
+          "lo": 0.8,
+          "mean_confidence": 0.8488505747126438
+        },
+        {
+          "accuracy": 0.9376731301939059,
+          "count": 722,
+          "hi": 1.0,
+          "lo": 0.9,
+          "mean_confidence": 0.9824376731301938
+        }
+      ],
+      "coverage": [
+        {
+          "accuracy": 0.8522613065326633,
+          "coverage": 0.995,
+          "n_covered": 995,
+          "threshold": 0.5
+        },
+        {
+          "accuracy": 0.9376731301939059,
+          "coverage": 0.722,
+          "n_covered": 722,
+          "threshold": 0.9
+        }
+      ],
+      "dataset": "xnli",
+      "ece": 0.05731999999999991,
+      "ece_floor": 0.015150540000000014,
+      "ece_ratio": 3.7833634972746752,
+      "latency_p50": 336.70500000000004,
+      "latency_p95": 536.8214999999999,
+      "macro_f1": {
+        "hi": 0.8742444921829988,
+        "lo": 0.8326276363006418,
+        "point": 0.8528724278433693
+      },
+      "mean_input_tokens": 464.709,
+      "n": 1000,
+      "n_choice_disagrees": 3
+    },
+    {
+      "accuracy": {
+        "hi": 0.812,
+        "lo": 0.761,
+        "point": 0.786
+      },
+      "arm": "B",
+      "aurc": 0.10076703407357311,
+      "bins": [
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.1,
+          "lo": 0.0,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.2,
+          "lo": 0.1,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.30000000000000004,
+          "lo": 0.2,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": 0.0,
+          "count": 1,
+          "hi": 0.4,
+          "lo": 0.30000000000000004,
+          "mean_confidence": 0.35
+        },
+        {
+          "accuracy": 0.2222222222222222,
+          "count": 9,
+          "hi": 0.5,
+          "lo": 0.4,
+          "mean_confidence": 0.4744444444444444
+        },
+        {
+          "accuracy": 0.40625,
+          "count": 64,
+          "hi": 0.6000000000000001,
+          "lo": 0.5,
+          "mean_confidence": 0.54671875
+        },
+        {
+          "accuracy": 0.5454545454545454,
+          "count": 66,
+          "hi": 0.7000000000000001,
+          "lo": 0.6000000000000001,
+          "mean_confidence": 0.6468181818181816
+        },
+        {
+          "accuracy": 0.6626506024096386,
+          "count": 83,
+          "hi": 0.8,
+          "lo": 0.7000000000000001,
+          "mean_confidence": 0.7493975903614459
+        },
+        {
+          "accuracy": 0.6573426573426573,
+          "count": 143,
+          "hi": 0.9,
+          "lo": 0.8,
+          "mean_confidence": 0.8470629370629371
+        },
+        {
+          "accuracy": 0.9037854889589906,
+          "count": 634,
+          "hi": 1.0,
+          "lo": 0.9,
+          "mean_confidence": 0.9801892744479496
+        }
+      ],
+      "coverage": [
+        {
+          "accuracy": 0.7919191919191919,
+          "coverage": 0.99,
+          "n_covered": 990,
+          "threshold": 0.5
+        },
+        {
+          "accuracy": 0.9037854889589906,
+          "coverage": 0.634,
+          "n_covered": 634,
+          "threshold": 0.9
+        }
+      ],
+      "dataset": "xnli",
+      "ece": 0.10107000000000001,
+      "ece_floor": 0.017375079999999994,
+      "ece_ratio": 5.816951634179529,
+      "latency_p50": 337.03,
+      "latency_p95": 531.2335,
+      "macro_f1": {
+        "hi": 0.8118045359196769,
+        "lo": 0.7665568422587627,
+        "point": 0.7901137803317476
+      },
+      "mean_input_tokens": 472.836,
+      "n": 1000,
+      "n_choice_disagrees": 1
+    },
+    {
+      "accuracy": {
+        "hi": 0.81,
+        "lo": 0.759,
+        "point": 0.784
+      },
+      "arm": "C",
+      "aurc": 0.10212859616420118,
+      "bins": [
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.1,
+          "lo": 0.0,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.2,
+          "lo": 0.1,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": NaN,
+          "count": 0,
+          "hi": 0.30000000000000004,
+          "lo": 0.2,
+          "mean_confidence": NaN
+        },
+        {
+          "accuracy": 0.6666666666666666,
+          "count": 3,
+          "hi": 0.4,
+          "lo": 0.30000000000000004,
+          "mean_confidence": 0.37666666666666665
+        },
+        {
+          "accuracy": 0.0,
+          "count": 3,
+          "hi": 0.5,
+          "lo": 0.4,
+          "mean_confidence": 0.4633333333333333
+        },
+        {
+          "accuracy": 0.3582089552238806,
+          "count": 67,
+          "hi": 0.6000000000000001,
+          "lo": 0.5,
+          "mean_confidence": 0.543134328358209
+        },
+        {
+          "accuracy": 0.5555555555555556,
+          "count": 63,
+          "hi": 0.7000000000000001,
+          "lo": 0.6000000000000001,
+          "mean_confidence": 0.6471428571428571
+        },
+        {
+          "accuracy": 0.6530612244897959,
+          "count": 98,
+          "hi": 0.8,
+          "lo": 0.7000000000000001,
+          "mean_confidence": 0.7491836734693876
+        },
+        {
+          "accuracy": 0.6850393700787402,
+          "count": 127,
+          "hi": 0.9,
+          "lo": 0.8,
+          "mean_confidence": 0.8491338582677166
+        },
+        {
+          "accuracy": 0.8951486697965572,
+          "count": 639,
+          "hi": 1.0,
+          "lo": 0.9,
+          "mean_confidence": 0.9796087636932708
+        }
+      ],
+      "coverage": [
+        {
+          "accuracy": 0.7867203219315896,
+          "coverage": 0.994,
+          "n_covered": 994,
+          "threshold": 0.5
+        },
+        {
+          "accuracy": 0.8951486697965572,
+          "coverage": 0.639,
+          "n_covered": 639,
+          "threshold": 0.9
+        }
+      ],
+      "dataset": "xnli",
+      "ece": 0.10464999999999999,
+      "ece_floor": 0.017144419999999994,
+      "ece_ratio": 6.104026849552218,
+      "latency_p50": 331.335,
+      "latency_p95": 526.5649999999999,
+      "macro_f1": {
+        "hi": 0.8117734507212996,
+        "lo": 0.7644617505165452,
+        "point": 0.7886036897976095
+      },
+      "mean_input_tokens": 480.836,
+      "n": 1000,
+      "n_choice_disagrees": 1
+    }
+  ],
+  "checks": {
+    "confidence_formula": {
+      "belebele/A": {
+        "max_abs_residual": 0.020000000000000018,
+        "max_abs_residual_trunc": 0.020000000000000018,
+        "n": 600
+      },
+      "belebele/B": {
+        "max_abs_residual": 0.020000000000000018,
+        "max_abs_residual_trunc": 0.020000000000000018,
+        "n": 600
+      },
+      "belebele/C": {
+        "max_abs_residual": 0.020000000000000018,
+        "max_abs_residual_trunc": 0.020000000000000018,
+        "n": 600
+      },
+      "massive/A": {
+        "max_abs_residual": 0.020000000000000018,
+        "max_abs_residual_trunc": 0.010000000000000009,
+        "n": 600
+      },
+      "massive/B": {
+        "max_abs_residual": 0.020000000000000018,
+        "max_abs_residual_trunc": 0.020000000000000018,
+        "n": 600
+      },
+      "massive/C": {
+        "max_abs_residual": 0.020000000000000018,
+        "max_abs_residual_trunc": 0.020000000000000018,
+        "n": 600
+      },
+      "xnli/A": {
+        "max_abs_residual": 0.020000000000000018,
+        "max_abs_residual_trunc": 0.020000000000000018,
+        "n": 1000
+      },
+      "xnli/B": {
+        "max_abs_residual": 0.020000000000000018,
+        "max_abs_residual_trunc": 0.020000000000000018,
+        "n": 1000
+      },
+      "xnli/C": {
+        "max_abs_residual": 0.020000000000000018,
+        "max_abs_residual_trunc": 0.020000000000000018,
+        "n": 1000
+      }
+    },
+    "model_provenance": {
+      "model": "jev-1.13.0",
+      "models": [
+        "jev-1.13.0"
+      ],
+      "pinned": true,
+      "status": "pinned"
+    },
+    "n_choice_disagrees_with_argmax": 8
+  },
+  "comparisons": [
+    {
+      "accuracy_reason": "CI [-0.0450, -0.0167] excludes 0 and |delta| = 0.0300 >= 0.03",
+      "accuracy_verdict": "MEASURABLY WORSE",
+      "arm_from": "A",
+      "arm_to": "B",
+      "calibration_reason": "CI [-0.0005, +0.0233] includes 0",
+      "calibration_verdict": "NO DETECTABLE DIFFERENCE",
+      "dataset": "belebele",
+      "delta_accuracy": {
+        "hi": -0.01666666666666672,
+        "lo": -0.0450416666666667,
+        "point": -0.030000000000000027
+      },
+      "delta_ece": {
+        "hi": 0.023267083333333112,
+        "lo": -0.0004908333333332128,
+        "point": 0.009633333333333473
+      },
+      "ece_ratio_from": 1.5122639980865153,
+      "ece_ratio_to": 2.0550115424657127,
+      "label": "B - A",
+      "n_paired": 600,
+      "stability_jitter": 0.0016666666666667052,
+      "token_ratio_per_call": 1.0817253003266827,
+      "token_ratio_state_only": 1.3784246368950765
+    },
+    {
+      "accuracy_reason": "CI [+0.0000, +0.0117] includes 0 and is tight (half-width 0.0058 <= 0.03)",
+      "accuracy_verdict": "NO DETECTABLE DIFFERENCE",
+      "arm_from": "B",
+      "arm_to": "C",
+      "calibration_reason": "CI [-0.0068, +0.0066] includes 0",
+      "calibration_verdict": "NO DETECTABLE DIFFERENCE",
+      "dataset": "belebele",
+      "delta_accuracy": {
+        "hi": 0.011666666666666603,
+        "lo": 0.0,
+        "point": 0.0050000000000000044
+      },
+      "delta_ece": {
+        "hi": 0.006570000000000019,
+        "lo": -0.0067887500000001644,
+        "point": 0.00011666666666657402
+      },
+      "ece_ratio_from": 2.0595360146617194,
+      "ece_ratio_to": 2.0559692190320527,
+      "label": "C - B",
+      "n_paired": 600,
+      "stability_jitter": 0.0033333333333332993,
+      "token_ratio_per_call": 0.9971123372982547,
+      "token_ratio_state_only": 1.0
+    },
+    {
+      "accuracy_reason": "CI [-0.0583, -0.0150] excludes 0 and |delta| = 0.0367 >= 0.03",
+      "accuracy_verdict": "MEASURABLY WORSE",
+      "arm_from": "A",
+      "arm_to": "B",
+      "calibration_reason": "CI [-0.0049, +0.0371] includes 0",
+      "calibration_verdict": "NO DETECTABLE DIFFERENCE",
+      "dataset": "massive",
+      "delta_accuracy": {
+        "hi": -0.014999999999999902,
+        "lo": -0.05833333333333335,
+        "point": -0.036666666666666625
+      },
+      "delta_ece": {
+        "hi": 0.037120000000000014,
+        "lo": -0.004855416666666632,
+        "point": 0.01294999999999985
+      },
+      "ece_ratio_from": 4.581004174886789,
+      "ece_ratio_to": 4.488662159343286,
+      "label": "B - A",
+      "n_paired": 600,
+      "stability_jitter": 0.0050000000000000044,
+      "token_ratio_per_call": 1.0012221853344043,
+      "token_ratio_state_only": 1.2624241061389627
+    },
+    {
+      "accuracy_reason": "CI [-0.0184, +0.0067] includes 0 and is tight (half-width 0.0125 <= 0.03)",
+      "accuracy_verdict": "NO DETECTABLE DIFFERENCE",
+      "arm_from": "B",
+      "arm_to": "C",
+      "calibration_reason": "CI [-0.0146, +0.0184] includes 0",
+      "calibration_verdict": "NO DETECTABLE DIFFERENCE",
+      "dataset": "massive",
+      "delta_accuracy": {
+        "hi": 0.006666666666666599,
+        "lo": -0.018375000000000082,
+        "point": -0.00666666666666671
+      },
+      "delta_ece": {
+        "hi": 0.018418333333333224,
+        "lo": -0.01455250000000006,
+        "point": -0.0012999999999998568
+      },
+      "ece_ratio_from": 4.591366066721888,
+      "ece_ratio_to": 4.388357895472739,
+      "label": "C - B",
+      "n_paired": 600,
+      "stability_jitter": 0.0050000000000000044,
+      "token_ratio_per_call": 1.0621329813161733,
+      "token_ratio_state_only": 1.0
+    },
+    {
+      "accuracy_reason": "CI [-0.0850, -0.0360] excludes 0 and |delta| = 0.0620 >= 0.03",
+      "accuracy_verdict": "MEASURABLY WORSE",
+      "arm_from": "A",
+      "arm_to": "B",
+      "calibration_reason": "CI [+0.0202, +0.0654] excludes 0 and |delta ECE| = 0.0455 >= 0.02",
+      "calibration_verdict": "LESS CALIBRATED",
+      "dataset": "pawsx",
+      "delta_accuracy": {
+        "hi": -0.03599999999999992,
+        "lo": -0.08502499999999996,
+        "point": -0.061999999999999944
+      },
+      "delta_ece": {
+        "hi": 0.06538049999999998,
+        "lo": 0.020204750000000046,
+        "point": 0.045530000000000126
+      },
+      "ece_ratio_from": 1.892912275021534,
+      "ece_ratio_to": 4.25833113897165,
+      "label": "B - A",
+      "n_paired": 1000,
+      "stability_jitter": 0.0030000000000000027,
+      "token_ratio_per_call": 1.0218017760482465,
+      "token_ratio_state_only": 1.1665785950820826
+    },
+    {
+      "accuracy_reason": "CI [+0.0070, +0.0260] with |delta| = 0.0160: neither a clear effect nor a tight null. The study cannot tell.",
+      "accuracy_verdict": "AMBIGUOUS",
+      "arm_from": "B",
+      "arm_to": "C",
+      "calibration_reason": "CI [-0.0248, +0.0018] includes 0",
+      "calibration_verdict": "NO DETECTABLE DIFFERENCE",
+      "dataset": "pawsx",
+      "delta_accuracy": {
+        "hi": 0.026000000000000023,
+        "lo": 0.007000000000000006,
+        "point": 0.016000000000000014
+      },
+      "delta_ece": {
+        "hi": 0.0018409999999997968,
+        "lo": -0.02482199999999997,
+        "point": -0.017309999999999992
+      },
+      "ece_ratio_from": 4.216474796502705,
+      "ece_ratio_to": 3.2931272175668105,
+      "label": "C - B",
+      "n_paired": 1000,
+      "stability_jitter": 0.0050000000000000044,
+      "token_ratio_per_call": 1.038354891038267,
+      "token_ratio_state_only": 1.0
+    },
+    {
+      "accuracy_reason": "CI [-0.0860, -0.0430] excludes 0 and |delta| = 0.0640 >= 0.03",
+      "accuracy_verdict": "MEASURABLY WORSE",
+      "arm_from": "A",
+      "arm_to": "B",
+      "calibration_reason": "CI [+0.0212, +0.0598] excludes 0 and |delta ECE| = 0.0438 >= 0.02",
+      "calibration_verdict": "LESS CALIBRATED",
+      "dataset": "xnli",
+      "delta_accuracy": {
+        "hi": -0.04299999999999993,
+        "lo": -0.08599999999999997,
+        "point": -0.06399999999999995
+      },
+      "delta_ece": {
+        "hi": 0.05981024999999995,
+        "lo": 0.02121950000000004,
+        "point": 0.043750000000000094
+      },
+      "ece_ratio_from": 3.7833634972746752,
+      "ece_ratio_to": 5.954492056553244,
+      "label": "B - A",
+      "n_paired": 1000,
+      "stability_jitter": 0.0020000000000000018,
+      "token_ratio_per_call": 1.0174883636856613,
+      "token_ratio_state_only": 1.2275896832731246
+    },
+    {
+      "accuracy_reason": "CI [-0.0110, +0.0070] includes 0 and is tight (half-width 0.0090 <= 0.03)",
+      "accuracy_verdict": "NO DETECTABLE DIFFERENCE",
+      "arm_from": "B",
+      "arm_to": "C",
+      "calibration_reason": "CI [-0.0055, +0.0122] includes 0",
+      "calibration_verdict": "NO DETECTABLE DIFFERENCE",
+      "dataset": "xnli",
+      "delta_accuracy": {
+        "hi": 0.007000000000000006,
+        "lo": -0.01100000000000001,
+        "point": -0.0020000000000000018
+      },
+      "delta_ece": {
+        "hi": 0.012184250000000034,
+        "lo": -0.005453250000000171,
+        "point": 0.003579999999999986
+      },
+      "ece_ratio_from": 5.816951634179529,
+      "ece_ratio_to": 6.113654978378753,
+      "label": "C - B",
+      "n_paired": 1000,
+      "stability_jitter": 0.0010000000000000009,
+      "token_ratio_per_call": 1.0169191855104096,
+      "token_ratio_state_only": 1.0
+    }
+  ],
+  "run_id": "20260921-es-v1",
+  "stability": [
+    {
+      "accuracy_jitter": 0.0016666666666667052,
+      "accuracy_pass0": 0.9816666666666667,
+      "accuracy_pass1": 0.98,
+      "arm": "A",
+      "dataset": "belebele",
+      "flip_rate": 0.0016666666666666668,
+      "kappa": 0.9977689278582822,
+      "max_abs_dp_max": 0.07999999999999996,
+      "mean_abs_dp_max": 0.0024833333333333335,
+      "n": 600
+    },
+    {
+      "accuracy_jitter": 0.0,
+      "accuracy_pass0": 0.9516666666666667,
+      "accuracy_pass1": 0.9516666666666667,
+      "arm": "B",
+      "dataset": "belebele",
+      "flip_rate": 0.0016666666666666668,
+      "kappa": 0.99777049472722,
+      "max_abs_dp_max": 0.18000000000000005,
+      "mean_abs_dp_max": 0.0035666666666666663,
+      "n": 600
+    },
+    {
+      "accuracy_jitter": 0.0033333333333332993,
+      "accuracy_pass0": 0.9566666666666667,
+      "accuracy_pass1": 0.9533333333333334,
+      "arm": "C",
+      "dataset": "belebele",
+      "flip_rate": 0.0033333333333333335,
+      "kappa": 0.9955414864684113,
+      "max_abs_dp_max": 0.14,
+      "mean_abs_dp_max": 0.0036166666666666656,
+      "n": 600
+    },
+    {
+      "accuracy_jitter": 0.0016666666666667052,
+      "accuracy_pass0": 0.845,
+      "accuracy_pass1": 0.8466666666666667,
+      "arm": "A",
+      "dataset": "massive",
+      "flip_rate": 0.008333333333333333,
+      "kappa": 0.9913825542683645,
+      "max_abs_dp_max": 0.16000000000000003,
+      "mean_abs_dp_max": 0.007983333333333335,
+      "n": 600
+    },
+    {
+      "accuracy_jitter": 0.0050000000000000044,
+      "accuracy_pass0": 0.8083333333333333,
+      "accuracy_pass1": 0.8033333333333333,
+      "arm": "B",
+      "dataset": "massive",
+      "flip_rate": 0.006666666666666667,
+      "kappa": 0.9930906819209055,
+      "max_abs_dp_max": 0.26,
+      "mean_abs_dp_max": 0.012733333333333331,
+      "n": 600
+    },
+    {
+      "accuracy_jitter": 0.0,
+      "accuracy_pass0": 0.8016666666666666,
+      "accuracy_pass1": 0.8016666666666666,
+      "arm": "C",
+      "dataset": "massive",
+      "flip_rate": 0.013333333333333334,
+      "kappa": 0.9861725265386665,
+      "max_abs_dp_max": 0.18000000000000005,
+      "mean_abs_dp_max": 0.012166666666666664,
+      "n": 600
+    },
+    {
+      "accuracy_jitter": 0.0,
+      "accuracy_pass0": 0.834,
+      "accuracy_pass1": 0.834,
+      "arm": "A",
+      "dataset": "pawsx",
+      "flip_rate": 0.012,
+      "kappa": 0.9748706887525391,
+      "max_abs_dp_max": 0.1299999999999999,
+      "mean_abs_dp_max": 0.011499999999999996,
+      "n": 1000
+    },
+    {
+      "accuracy_jitter": 0.0030000000000000027,
+      "accuracy_pass0": 0.772,
+      "accuracy_pass1": 0.775,
+      "arm": "B",
+      "dataset": "pawsx",
+      "flip_rate": 0.021,
+      "kappa": 0.954564336898951,
+      "max_abs_dp_max": 0.17999999999999994,
+      "mean_abs_dp_max": 0.012869999999999998,
+      "n": 1000
+    },
+    {
+      "accuracy_jitter": 0.0050000000000000044,
+      "accuracy_pass0": 0.788,
+      "accuracy_pass1": 0.783,
+      "arm": "C",
+      "dataset": "pawsx",
+      "flip_rate": 0.017,
+      "kappa": 0.963556226311547,
+      "max_abs_dp_max": 0.14,
+      "mean_abs_dp_max": 0.01311,
+      "n": 1000
+    },
+    {
+      "accuracy_jitter": 0.0020000000000000018,
+      "accuracy_pass0": 0.85,
+      "accuracy_pass1": 0.852,
+      "arm": "A",
+      "dataset": "xnli",
+      "flip_rate": 0.008,
+      "kappa": 0.9877790015749811,
+      "max_abs_dp_max": 0.12,
+      "mean_abs_dp_max": 0.009450000000000004,
+      "n": 1000
+    },
+    {
+      "accuracy_jitter": 0.0010000000000000009,
+      "accuracy_pass0": 0.786,
+      "accuracy_pass1": 0.785,
+      "arm": "B",
+      "dataset": "xnli",
+      "flip_rate": 0.017,
+      "kappa": 0.973149910368083,
+      "max_abs_dp_max": 0.16000000000000003,
+      "mean_abs_dp_max": 0.01306,
+      "n": 1000
+    },
+    {
+      "accuracy_jitter": 0.0010000000000000009,
+      "accuracy_pass0": 0.784,
+      "accuracy_pass1": 0.783,
+      "arm": "C",
+      "dataset": "xnli",
+      "flip_rate": 0.015,
+      "kappa": 0.9762528219563243,
+      "max_abs_dp_max": 0.16000000000000003,
+      "mean_abs_dp_max": 0.012669999999999999,
+      "n": 1000
+    }
+  ],
+  "warnings": []
+}

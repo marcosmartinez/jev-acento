@@ -467,8 +467,12 @@ def write_results(results: Results, out_dir: Path) -> tuple[Path, Path]:
         json.dumps(results.as_dict(), indent=2, sort_keys=True, default=float) + "\n",
         encoding="utf-8",
     )
+    deviations_path = out_dir / "DEVIATIONS.md"
+    deviations = (
+        deviations_path.read_text(encoding="utf-8") if deviations_path.exists() else None
+    )
     md_path = out_dir / "results.md"
-    md_path.write_text(render_markdown(results), encoding="utf-8")
+    md_path.write_text(render_markdown(results, deviations), encoding="utf-8")
     return json_path, md_path
 
 
@@ -476,8 +480,14 @@ def _fmt_ci(d: dict) -> str:
     return f"{d['point']:+.4f} [{d['lo']:+.4f}, {d['hi']:+.4f}]"
 
 
-def render_markdown(results: Results) -> str:
-    """Render the report. Every number here comes from ``results.json``; none is typed by hand."""
+def render_markdown(results: Results, deviations: str | None = None) -> str:
+    """Render the report.
+
+    Every *number* here comes from ``results.json``; none is typed by hand. The one hand-written
+    part is the deviations note, which is prose by nature and is read from ``DEVIATIONS.md``.
+    It is appended rather than merged so that regenerating the report can never quietly drop it,
+    and its absence is reported explicitly rather than rendering an empty section.
+    """
     out: list[str] = [
         f"# Results — run `{results.run_id}`",
         "",
@@ -601,5 +611,14 @@ def render_markdown(results: Results) -> str:
             f"- `confidence ≈ (k·p_max − 1)/(k − 1)`: largest residual under truncation is "
             f"**{worst:.4f}** across all cells."
         )
-    out.append("")
+
+    out += ["", "## Deviations from the pre-registration", ""]
+    if deviations and deviations.strip():
+        out += [deviations.strip(), ""]
+    else:
+        out += [
+            "*No `DEVIATIONS.md` found.* Either the run followed the pre-registration exactly "
+            "and nobody recorded that, or a deviation went undocumented. Write the file.",
+            "",
+        ]
     return "\n".join(out)

@@ -6,8 +6,71 @@ Auditoría independiente y reproducible de [Jev](https://typesafe.ai) —el mode
 TypeSafe AI— en **español**, más una herramienta de línea de comandos para que cualquiera corra
 la misma comparación sobre sus propios datos etiquetados.
 
-> **Estado: en construcción (Fase 1).** Todavía no hay resultados. Los números de este README los
-> va a generar `make reproduce` a partir de las corridas congeladas; nada acá se escribe a mano.
+**Corrida `20260921-es-v1`** — 19.200 llamadas, 3.200 ítems pareados, modelo `jev-1.13.0`
+(versión fijada), USD 0,58, cero errores. Todos los números de abajo salen de
+[`results.json`](results.json) vía `make reproduce`; ninguno se escribió a mano.
+
+## Hallazgos
+
+**1. El español cuesta accuracy en los cuatro datasets.** Manteniendo las instrucciones en
+inglés y cambiando solo el `state` de inglés a español (B − A), Jev es mediblemente peor en
+todos:
+
+| Dataset | A (state EN) | B (state ES) | Δ accuracy | Veredicto |
+|---|---|---|---|---|
+| XNLI | 0,850 | 0,786 | −6,4 pp `[−8,6, −4,3]` | **mediblemente peor** |
+| PAWS-X | 0,834 | 0,772 | −6,2 pp `[−8,5, −3,6]` | **mediblemente peor** |
+| MASSIVE | 0,845 | 0,808 | −3,7 pp `[−5,8, −1,5]` | **mediblemente peor** |
+| Belebele | 0,982 | 0,952 | −3,0 pp `[−4,5, −1,7]` | **mediblemente peor** |
+
+**2. También cuesta calibración, en las dos tareas más difíciles.** El ECE se duplica en XNLI
+(0,057 → 0,101) y PAWS-X (0,033 → 0,078) — *menos calibrado* según la regla pre-registrada. En
+MASSIVE y Belebele el cambio no es detectable. Acá la calibración importa más que la accuracy:
+la consecuencia operativa es que automatizar con `p_max ≥ 0,9` cubre **72,2% de XNLI en inglés
+pero solo 63,4% en español**, y los ítems que sí automatizás son *menos* precisos
+(0,938 → 0,904), no más.
+
+**3. Escribir las instrucciones en español no ayuda.** Es la pregunta que nadie había medido, y
+la respuesta es un nulo limpio en tres de los cuatro datasets (C − B):
+
+| Dataset | Δ accuracy | Veredicto |
+|---|---|---|
+| XNLI | −0,2 pp `[−1,1, +0,7]` | sin diferencia detectable |
+| MASSIVE | −0,7 pp `[−1,8, +0,7]` | sin diferencia detectable |
+| Belebele | +0,5 pp `[+0,0, +1,2]` | sin diferencia detectable |
+| PAWS-X | +1,6 pp `[+0,7, +2,6]` | ambiguo — real pero por debajo del umbral de 3 pp |
+
+En calibración no hay diferencia detectable en ninguno. **Recomendación práctica: dejá las
+`instructions` y los `criteria` en inglés.** Nunca es peor, es lo que el proveedor documenta
+como su punto fuerte, y en MASSIVE la redacción en español cuesta 6,2% más tokens de input a
+cambio de nada.
+
+**4. El texto en español cuesta entre 17% y 38% más tokens de input** que el mismo contenido en
+inglés (state-only, restando el overhead fijo de la pregunta). Mucho menos que el ~3× que la
+auditoría rusa encontró para el cirílico.
+
+### Comparación con la auditoría rusa
+
+| | Ruso (trabajo previo) | Español (este repo) |
+|---|---|---|
+| Accuracy XNLI | 88,3% → 77,3% (−11,0 pp) | 85,0% → 78,6% (−6,4 pp) |
+| ECE XNLI | 0,032 → 0,096 | 0,057 → 0,101 |
+| Ratio de tokens | ~3× | ~1,23× |
+
+El español se degrada menos que el ruso, que es lo esperable de un idioma en alfabeto latino más
+cercano a la distribución de entrenamiento. La dirección es la misma; la magnitud, alrededor de
+la mitad.
+
+### ¿El modelo fue lo bastante estable como para confiar en esto?
+
+Sí, y se verificó **antes** de interpretar nada de lo de arriba. Las pasadas 0 y 1 mandaron
+requests byte a byte idénticos: tasa de flips 0,2–2,1%, κ de Cohen ≥ 0,95, y **jitter de accuracy
+entre pasadas de 0,000–0,005 contra deltas de 0,030–0,064**. El ruido propio del modelo es un
+orden de magnitud menor que los efectos reportados.
+
+Tablas completas, bins de confiabilidad, curvas de accuracy selectiva y cobertura por brazo en
+[`results.md`](results.md). Desviaciones del pre-registro: [`DEVIATIONS.md`](DEVIATIONS.md)
+(no hubo ninguna).
 
 ## Las preguntas
 
@@ -45,6 +108,21 @@ Eso es lo que aísla el efecto del idioma de las instrucciones del efecto del es
 
 Comparaciones primarias pre-registradas: **B − A** (comparable con la
 [auditoría rusa](https://github.com/AHTOOOXA/jev-cyrillic-audit)) y **C − B** (nueva).
+
+### Figuras
+
+![Calibración por brazo](figures/reliability_paired_es.png)
+
+*Confianza contra accuracy observada, los tres brazos sobre los mismos ítems. Las
+anotaciones son conteos por bin — los bins de baja confianza tienen unidades y no hay que
+leerlos como tendencia. En XNLI y PAWS-X los brazos en español caen visiblemente por debajo
+de la diagonal: sobreconfianza.*
+
+![Accuracy selectiva por brazo](figures/selective_accuracy_es.png)
+
+*Accuracy contra cobertura, de mayor a menor confianza. Es la vista operativa: cuánto podés
+automatizar, y qué tan preciso es lo que automatizás. Las líneas punteadas marcan la
+cobertura alcanzada con `p_max ≥ 0,5` y `≥ 0,9`.*
 
 ## Datasets
 
@@ -131,17 +209,28 @@ make reproduce      # regenerar results.* y figures/ de forma determinística de
 
 ## Limitaciones
 
-La lista completa va en [`results.md`](results.md) cuando salga la corrida. Las que ya se conocen:
-
-- **Fijar la versión del modelo depende del proveedor.** Por la API **directa** de TypeSafe,
+- **Una sola redacción por celda.** Cada celda usa una redacción única, que es una muestra de
+  tamaño 1 del espacio de redacciones posibles. El nulo de C − B significa que *estas dos
+  redacciones* rindieron igual, no que las instrucciones en español y en inglés sean
+  intercambiables en general. Es la amenaza más grande a la validez del hallazgo 3, y por eso
+  está acá arriba y no escondida.
+- **MASSIVE es es-ES**, Belebele y XNLI son traducciones, y nada de esto es rioplatense ni
+  ninguna otra variedad regional. Un equipo que escribe para usuarios argentinos o mexicanos
+  debería tomar estos números como cota superior de lo que le va a rendir su propio texto.
+- **Score no está cubierto.** No existe un dataset ordinal paralelo adecuado, así que solo se
+  midieron Choice y Noul. Nada acá dice nada sobre Score.
+- **Cuatro benchmarks académicos no son tu workload.** XNLI, PAWS-X, MASSIVE y Belebele son
+  limpios, cortos y balanceados; tus tickets no. Usá `acento compare` sobre tus propios datos
+  etiquetados en vez de asumir que estos deltas se transfieren.
+- **Fijar la versión del modelo depende del proveedor.** **Esta corrida quedó anclada:** las
+  19.200 filas reportan `jev-1.13.0`, verificado desde los datos y no asumido. Por la API **directa** de TypeSafe,
   cada fila registra la versión que respondió (`jev-1.13.0`) y la corrida queda anclada. Por el
   **Gateway de Vercel** no: rechaza ids versionados (`typesafe-ai/jev-1.13.0` → 404) y devuelve
   el alias `typesafe-ai/jev`, así que un cambio silencioso de modelo a mitad de corrida solo se
-  puede detectar, no descartar. El `results.md` declara cuál de los dos casos aplicó, leyéndolo
-  de las filas y no de la configuración. Ver [`docs/providers.md`](docs/providers.md).
-- **Una sola redacción por celda** es una muestra de tamaño 1 del espacio de redacciones.
-- **Score queda fuera** de la v0.1: no hay dataset ordinal paralelo adecuado.
-- **MASSIVE es es-ES**, no rioplatense.
+  puede detectar, no descartar. Ver [`docs/providers.md`](docs/providers.md).
+- **Una sola corrida.** La estabilidad se midió *dentro* de esta corrida (dos pasadas, con ~20
+  minutos de diferencia). Nada acá acota cuánto se mueve el comportamiento de Jev en español
+  entre versiones del modelo.
 
 ## Licencia
 

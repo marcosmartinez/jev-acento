@@ -1,0 +1,103 @@
+{
+  "20260921-es-v1": {
+    "alignment": [
+      {
+        "dataset": "belebele",
+        "mismatched_ids": [],
+        "n_gold_mismatch": 0,
+        "n_joined": 900,
+        "n_missing": 0,
+        "n_rows": {
+          "en": 900,
+          "es": 900
+        }
+      },
+      {
+        "dataset": "massive",
+        "mismatched_ids": [],
+        "n_gold_mismatch": 0,
+        "n_joined": 2974,
+        "n_missing": 0,
+        "n_rows": {
+          "en": 2974,
+          "es": 2974
+        }
+      },
+      {
+        "dataset": "pawsx",
+        "mismatched_ids": [],
+        "n_gold_mismatch": 0,
+        "n_joined": 2000,
+        "n_missing": 0,
+        "n_rows": {
+          "en": 2000,
+          "es": 2000
+        }
+      },
+      {
+        "dataset": "xnli",
+        "mismatched_ids": [],
+        "n_gold_mismatch": 0,
+        "n_joined": 5010,
+        "n_missing": 0,
+        "n_rows": {
+          "en": 5010,
+          "es": 5010
+        }
+      }
+    ],
+    "config": {
+      "arms": [
+        "A",
+        "B",
+        "C"
+      ],
+      "concurrency": 8,
+      "datasets": [
+        "belebele",
+        "massive",
+        "pawsx",
+        "xnli"
+      ],
+      "dry_run": false,
+      "max_usd": 3.0,
+      "n_override": null,
+      "passes": 2,
+      "provider": "typesafe",
+      "rpm": null,
+      "run_id": "20260921-es-v1",
+      "seed": 20260920
+    },
+    "summary": {
+      "calls": 19200,
+      "errors": [],
+      "finished": "2026-09-21T00:46:24.680+00:00",
+      "model_release_after": {
+        "name": "jev-latest",
+        "release_date": "2026-09-10T18:38:01.391457+00:00"
+      },
+      "model_release_before": {
+        "name": "jev-latest",
+        "release_date": "2026-09-10T18:38:01.391457+00:00"
+      },
+      "question_overhead": {
+        "belebele/A": 502,
+        "belebele/B": 502,
+        "belebele/C": 500,
+        "massive/A": 1584,
+        "massive/B": 1584,
+        "massive/C": 1683,
+        "pawsx/A": 377,
+        "pawsx/B": 377,
+        "pawsx/C": 394,
+        "xnli/A": 429,
+        "xnli/B": 429,
+        "xnli/C": 437
+      },
+      "run_id": "20260921-es-v1",
+      "skipped": 0,
+      "spent_usd": 0.5796312479999909,
+      "started": "2026-09-21T00:27:18.574+00:00"
+    }
+  }
+}
