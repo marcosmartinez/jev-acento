@@ -263,6 +263,21 @@ def test_explicit_rpm_overrides_the_provider_default(monkeypatch):
     asyncio.run(client.aclose())
 
 
+def test_direct_path_request_id_comes_from_the_header():
+    """The direct API has no generationId in the body, but does set a request-id header."""
+    body = {"model": "jev-1.13.0", "answers": {"q": {"type": "noul", "noul": 0.9}},
+            "usage": {"input_tokens": 100}}
+    resp = parse_response(body, 1.0, {"x-typesafe-request-id": "req_abc123"})
+    assert resp.generation_id == "req_abc123"
+
+
+def test_gateway_generation_id_wins_over_a_header():
+    body = {"answers": {"q": {"type": "noul", "noul": 0.9}}, "usage": {"input_tokens": 100},
+            "provider_metadata": {"gateway": {"generationId": "gen_xyz"}}}
+    resp = parse_response(body, 1.0, {"x-typesafe-request-id": "req_abc"})
+    assert resp.generation_id == "gen_xyz"
+
+
 def test_direct_path_has_no_gateway_metadata_and_still_accounts_correctly():
     """The direct API returns no provider_metadata, so cost falls back to the list price."""
     body = {

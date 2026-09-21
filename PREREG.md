@@ -1,13 +1,19 @@
 # Pre-registration — jev-acento v0.1
 
-**Status: DRAFT.** Not yet frozen. Pending review of the Spanish prompt wordings by Marcos
-Martinez. Once frozen, this file is hashed into `PREREG.sha256` and the runner refuses to write
-to `runs/` if either this file or any prompt changes.
+**Status: FROZEN.** This file is hashed into `PREREG.sha256` and every prompt into
+`prompts.sha256`. The runner refuses to write to `runs/` if either this file or any prompt
+changes, or if the frozen files have uncommitted edits in git.
 
-- **Registered on:** *(pending — the date this file is committed together with its hash)*
+- **Registered on:** 2026-09-21 (UTC), at the commit that adds `PREREG.sha256` and
+  `prompts.sha256`
 - **Registered by:** Marcos Martinez
+- **Spanish wordings approved by:** Marcos Martinez, 2026-09-21. The approval covers all four
+  `prompts/*.es.json` files, including the 59 MASSIVE intent glosses and the neutral register
+  described in section 8.
 - **Model under test:** Jev (TypeSafe AI System One), model id `jev-1.13.0`
-- **Provider:** *(pending — see "Provider choice" in section 5)*
+- **Provider:** `typesafe` — the direct API, chosen because it is the only path that reports
+  which model version answered each call. Verified live on 2026-09-21: a request sending
+  `jev-1.13.0` returns `"model": "jev-1.13.0"`.
 - **Random seed:** `20260920`, used for sampling, all bootstraps and all noise-floor simulations
 
 ---
@@ -100,10 +106,11 @@ XNLI rows reported by the Russian audit for `ru`/`en` do not appear in `es`/`en`
 - Hard spend cap, default USD 5.
 
 **Provider choice.** The run goes through one provider and only one; mixing them within a run is
-detected from the rows and invalidates it. The **direct** TypeSafe API is preferred, because it
-is the only path that reports which model version answered each call (see section 8). The
-Gateway remains supported so that others can reproduce this work without an approved TypeSafe
-account.
+detected from the rows and invalidates it. This registration commits to the **direct** TypeSafe
+API, because it is the only path that reports which model version answered each call (see
+section 8). The Gateway remains supported in the code so that others can reproduce this work
+without an approved TypeSafe account, but a Gateway reproduction will be *unpinned* and
+`results.md` will say so.
 
 ## 6. Metrics
 

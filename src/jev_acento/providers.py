@@ -232,11 +232,29 @@ def _extract_cost(body: dict[str, Any], input_tokens: int) -> float:
     return input_tokens * USD_PER_INPUT_TOKEN
 
 
-def _extract_generation_id(body: dict[str, Any]) -> str | None:
-    return body.get("provider_metadata", {}).get("gateway", {}).get("generationId")
+def _extract_generation_id(
+    body: dict[str, Any], headers: dict[str, str] | None = None
+) -> str | None:
+    """A per-call identifier, from whichever place this backend puts one.
+
+    The Gateway returns ``generationId`` in the response body. The direct API returns nothing in
+    the body but sets an ``x-typesafe-request-id`` header. Both are worth recording: they are
+    the only handle on an individual call if a result later needs to be queried or disputed.
+    """
+    from_body = body.get("provider_metadata", {}).get("gateway", {}).get("generationId")
+    if from_body:
+        return str(from_body)
+    if headers:
+        # httpx header lookups are case-insensitive, but a plain dict from a test is not.
+        for key in ("x-typesafe-request-id", "X-Typesafe-Request-Id"):
+            if key in headers:
+                return str(headers[key])
+    return None
 
 
-def parse_response(body: dict[str, Any], latency_ms: float) -> JevResponse:
+def parse_response(
+    body: dict[str, Any], latency_ms: float, headers: dict[str, str] | None = None
+) -> JevResponse:
     """Normalise a full API response body."""
     answers_raw = body.get("answers")
     if not isinstance(answers_raw, dict):
@@ -249,7 +267,7 @@ def parse_response(body: dict[str, Any], latency_ms: float) -> JevResponse:
         input_tokens=input_tokens,
         output_tokens=int(usage.get("output_tokens", 0)),
         cost_usd=_extract_cost(body, input_tokens),
-        generation_id=_extract_generation_id(body),
+        generation_id=_extract_generation_id(body, headers),
         latency_ms=latency_ms,
         raw=body,
     )
@@ -357,7 +375,7 @@ class JevClient:
                 latency_ms = (time.perf_counter() - started) * 1000.0
 
                 if resp.status_code == 200:
-                    parsed = parse_response(resp.json(), latency_ms)
+                    parsed = parse_response(resp.json(), latency_ms, dict(resp.headers))
                     self.spent_usd += parsed.cost_usd
                     self.calls += 1
                     return parsed
