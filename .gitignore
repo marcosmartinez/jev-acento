@@ -30,3 +30,6 @@ scratch/
 
 # --- Artefactos de dry-run: números fabricados, nunca se commitean ---
 runs/dryrun*
+
+# --- Borradores para publicar: material personal, no del repo ---
+DRAFTS.md
