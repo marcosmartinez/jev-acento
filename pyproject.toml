@@ -1,6 +1,6 @@
 [project]
 name = "jev-acento"
-version = "0.1.0"
+version = "0.1.1"
 description = "Auditoría reproducible de Jev (TypeSafe AI) en español: ¿cuánto cuesta el idioma, y en qué idioma conviene escribir las instrucciones?"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
