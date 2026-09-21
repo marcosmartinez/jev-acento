@@ -72,6 +72,18 @@ The brief originally scoped Spanish **and** Portuguese. v0.1 ships Spanish only,
 Portuguese is **future work**, and it is cheap to add: arm A (English state) is shared across
 target languages, so a v0.2 needs only arms B and C on MASSIVE and Belebele.
 
+## Two ways in
+
+```bash
+acento run --provider typesafe    # direct; pins the model version
+acento run --provider gateway     # Vercel AI Gateway; no waitlist
+```
+
+Both speak the identical native wire format. The direct path is preferred for the audit because
+it is the only one that reports which model version answered. The Gateway path is kept so the
+work is reproducible without an approved TypeSafe account. Full comparison in
+[`docs/providers.md`](docs/providers.md).
+
 ## Install
 
 ```bash
@@ -113,6 +125,7 @@ Spanish wordings. Until `make freeze` is run and its manifests are committed, `m
 correctly reports that nothing is registered, and `make run` refuses to write to `runs/`.
 
 ```bash
+acento smoke --provider typesafe   # verify a provider before trusting it (3 calls)
 make check-prereg   # verify the frozen prompts and pre-registration still hash correctly
 make test           # metrics on synthetic data, runner against the fake API, freeze checks
 make dry-run        # full pipeline, no network, no spend
@@ -124,10 +137,13 @@ make reproduce      # regenerate results.* and figures/ deterministically from r
 
 See [`results.md`](results.md) for the full list once the run lands. Known up front:
 
-- **No version pinning.** The Vercel AI Gateway rejects versioned model ids
-  (`typesafe-ai/jev-1.13.0` → 404) and returns `model: "typesafe-ai/jev"`. Each call therefore
-  records its timestamp and `generationId`, and each run snapshots the provider's advertised
-  `release_date`. A silent model update mid-run cannot be fully ruled out, only detected.
+- **Version pinning depends on the provider.** Run through the **direct** TypeSafe API and
+  every row records the versioned model that answered it (`jev-1.13.0`), anchoring the run.
+  Run through the **Vercel AI Gateway** and it does not: the Gateway rejects versioned model
+  ids (`typesafe-ai/jev-1.13.0` → 404) and echoes back the alias `typesafe-ai/jev`, so a silent
+  model update mid-run can only be detected, not excluded. `results.md` states which of the two
+  applied, read from the rows rather than from configuration. See
+  [`docs/providers.md`](docs/providers.md).
 - **One wording per cell** is a sample of size 1 from the space of possible wordings.
 - **Score is out of scope** for v0.1 — no suitable parallel ordinal dataset.
 - **MASSIVE is es-ES**, not Rioplatense.

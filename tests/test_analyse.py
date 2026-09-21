@@ -142,13 +142,57 @@ def test_model_change_mid_run_produces_a_loud_warning():
     assert any("MODEL CHANGED MID-RUN" in w for w in results.warnings)
 
 
-def test_no_warning_when_the_model_held_still():
-    rows = [_row("i-1", "A", 0, "x", "x", 0.9)]
+def test_no_release_date_warning_when_the_model_held_still():
+    rows = [_row("i-1", "A", 0, "x", "x", 0.9, model="jev-1.13.0")]
     manifest = {"summary": {
         "model_release_before": {"release_date": "2026-09-15"},
         "model_release_after": {"release_date": "2026-09-15"},
     }}
-    assert analyse(rows, "r", manifest=manifest).warnings == []
+    warnings = analyse(rows, "r", manifest=manifest).warnings
+    assert not any("MODEL CHANGED" in w for w in warnings)
+    assert warnings == [], "a pinned model with a stable release date warrants no warning at all"
+
+
+# ---------------------------------------------------------------- model provenance
+
+
+def test_a_versioned_model_id_counts_as_pinned():
+    """The direct TypeSafe API echoes the version that answered; that anchors the run."""
+    rows = [_row(f"i-{i}", "A", 0, "x", "x", 0.9, model="jev-1.13.0") for i in range(4)]
+    prov = analyse(rows, "r").checks["model_provenance"]
+    assert prov["status"] == "pinned"
+    assert prov["pinned"] is True
+    assert prov["model"] == "jev-1.13.0"
+
+
+def test_a_gateway_alias_is_flagged_as_unpinned():
+    rows = [_row(f"i-{i}", "A", 0, "x", "x", 0.9, model="typesafe-ai/jev") for i in range(4)]
+    results = analyse(rows, "r")
+    assert results.checks["model_provenance"]["status"] == "unpinned"
+    assert any("MODEL NOT PINNED" in w for w in results.warnings)
+
+
+def test_jev_latest_is_not_a_pin():
+    """An alias can be repointed between two passes of the same run."""
+    rows = [_row("i-1", "A", 0, "x", "x", 0.9, model="jev-latest")]
+    assert analyse(rows, "r").checks["model_provenance"]["pinned"] is False
+
+
+def test_mixed_model_ids_invalidate_the_run():
+    rows = [
+        _row("i-1", "A", 0, "x", "x", 0.9, model="jev-1.13.0"),
+        _row("i-2", "A", 0, "x", "x", 0.9, model="jev-1.14.0"),
+    ]
+    results = analyse(rows, "r")
+    assert results.checks["model_provenance"]["status"] == "mixed"
+    assert any("MIXED MODEL IDS" in w for w in results.warnings)
+
+
+def test_pinned_provenance_is_stated_in_the_report():
+    from jev_acento.analyse import render_markdown
+
+    rows = [_row(f"i-{i}", "A", 0, "x", "x", 0.9, model="jev-1.13.0") for i in range(4)]
+    assert "Model pinned" in render_markdown(analyse(rows, "r"))
 
 
 def test_analyse_produces_both_primary_comparisons():

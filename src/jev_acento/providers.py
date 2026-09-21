@@ -28,6 +28,7 @@ import asyncio
 import json
 import os
 import random
+import re
 import time
 from dataclasses import dataclass, field
 from typing import Any, Literal
@@ -47,12 +48,21 @@ USD_PER_INPUT_TOKEN = 0.042 / 1_000_000
 
 @dataclass(frozen=True)
 class Provider:
-    """Where to send requests, and under which model id."""
+    """Where to send requests, under which model id, and what that backend can tell us.
+
+    ``reports_version`` is the difference that matters for the audit. The direct API resolves
+    whatever model name you send and echoes the *versioned* id that actually answered
+    (``jev-1.13.0``), so every row is pinned to a known model. The Gateway echoes the alias
+    ``typesafe-ai/jev`` and rejects versioned ids outright, so a Gateway run can only record a
+    timestamp and a ``generationId`` and hope the model did not move underneath it.
+    """
 
     name: str
     base_url: str
     api_key_env: str
     model: str
+    default_rpm: int = 600
+    reports_version: bool = False
 
     @property
     def endpoint(self) -> str:
@@ -78,16 +88,35 @@ PROVIDERS: dict[str, Provider] = {
         base_url="https://ai-gateway.vercel.sh/typesafe",
         api_key_env="AI_GATEWAY_API_KEY",
         model="typesafe-ai/jev",
+        # The Gateway publishes no rate limit and no rate-limit headers, so this is a
+        # deliberately conservative guess rather than a documented number.
+        default_rpm=600,
+        reports_version=False,
     ),
     "typesafe": Provider(
         name="typesafe",
         base_url="https://api.typesafe.ai",
         api_key_env="TYPESAFE_API_KEY",
-        # Direct access accepts a versioned id, and we always use one rather than the alias so
-        # the run is reproducible. Bump deliberately, never silently.
+        # Always the versioned id, never the `jev-latest` alias: an alias can be repointed
+        # between two passes of the same run. Bump this deliberately.
         model="jev-1.13.0",
+        # Documented as 1200 rpm / 250k tokens per second, and explicitly subject to change
+        # without notice. At roughly 800 input tokens per call, 1200 rpm is about 16k tokens
+        # per second, so requests-per-minute is the binding limit, not tokens.
+        default_rpm=1200,
+        reports_version=True,
     ),
 }
+
+
+def is_versioned_model_id(model: str) -> bool:
+    """Whether a model string identifies one specific model rather than a moving alias.
+
+    ``jev-1.13.0`` pins a version. ``typesafe-ai/jev``, ``jev-latest`` and ``jev-preview`` do
+    not: each can resolve to a different model tomorrow than it does today.
+    """
+    tail = model.rsplit("/", 1)[-1]
+    return bool(re.search(r"\d+\.\d+", tail))
 
 
 @dataclass
@@ -263,20 +292,21 @@ class JevClient:
     malformed, and retrying it only burns budget.
     """
 
-    RETRY_STATUSES = frozenset({429, 500, 502, 503, 504})
+    # 529 "Overloaded" is documented by TypeSafe alongside 429 as a back-off-and-retry status.
+    RETRY_STATUSES = frozenset({429, 500, 502, 503, 504, 529})
 
     def __init__(
         self,
         provider: Provider,
         *,
-        rpm: int = 600,
+        rpm: int | None = None,
         concurrency: int = 8,
         max_usd: float = 5.0,
         max_retries: int = 6,
         timeout: float = 60.0,
     ) -> None:
         self.provider = provider
-        self.pacer = Pacer(rpm)
+        self.pacer = Pacer(rpm if rpm is not None else provider.default_rpm)
         self.semaphore = asyncio.Semaphore(concurrency)
         self.max_usd = max_usd
         self.max_retries = max_retries

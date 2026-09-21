@@ -6,7 +6,8 @@ to `runs/` if either this file or any prompt changes.
 
 - **Registered on:** *(pending — the date this file is committed together with its hash)*
 - **Registered by:** Marcos Martinez
-- **Model under test:** Jev (TypeSafe AI System One), via the Vercel AI Gateway passthrough
+- **Model under test:** Jev (TypeSafe AI System One), model id `jev-1.13.0`
+- **Provider:** *(pending — see "Provider choice" in section 5)*
 - **Random seed:** `20260920`, used for sampling, all bootstraps and all noise-floor simulations
 
 ---
@@ -93,8 +94,16 @@ XNLI rows reported by the Russian audit for `ru`/`en` do not appear in `es`/`en`
 - Two passes per cell. **Pass 0 is the primary result**; pass 1 exists only to measure stability.
 - The API does not cache identical requests (verified 2026-09-20: a byte-identical repeat returns
   a fresh `generationId`), so pass 1 is a genuine re-measurement.
-- Concurrency 8, pacer 600 rpm, retries with backoff on 429/5xx honouring `retry-after`.
+- Concurrency 8, retries with backoff on 429/5xx/529 honouring `retry-after`.
+- Pacer set to the provider's own limit: 1200 rpm direct (documented), 600 rpm through the
+  Gateway (undocumented, so a conservative guess).
 - Hard spend cap, default USD 5.
+
+**Provider choice.** The run goes through one provider and only one; mixing them within a run is
+detected from the rows and invalidates it. The **direct** TypeSafe API is preferred, because it
+is the only path that reports which model version answered each call (see section 8). The
+Gateway remains supported so that others can reproduce this work without an approved TypeSafe
+account.
 
 ## 6. Metrics
 
@@ -160,10 +169,21 @@ Noul are measured.
 
 **MASSIVE is es-ES.** Not Rioplatense, not Latin American.
 
-**No version pin.** The Gateway rejects versioned model ids and reports only the alias. Each row
-records its timestamp and `generationId`, and each run snapshots the provider's advertised
-`release_date` before and after. If the two snapshots differ, the run spans a model change, is
-not internally comparable, and will be discarded rather than reported.
+**Version pinning is a property of the provider, and is reported from the data.** Each row
+records the `model` string the API echoed back for that call. After the run, `analyse.py`
+classifies the whole run from those values:
+
+- *pinned* — one versioned id (`jev-1.13.0`) across every row. Achievable only on the direct
+  API, which resolves whatever name is sent and reports the version that answered.
+- *unpinned* — one alias (`typesafe-ai/jev`) across every row. This is the best the Gateway can
+  do: it rejects versioned ids with HTTP 404. A silent model change can then only be bounded by
+  the per-row timestamp, the per-row `generationId`, and a snapshot of the provider's advertised
+  `release_date` taken before and after the run.
+- *mixed* — more than one id appears. The run spans a model change or mixes providers, is not
+  internally comparable, and **will be discarded rather than reported.**
+
+Whichever applies is stated in `results.md`. It is derived from the rows, not from the run
+configuration, so it cannot be satisfied by asserting it.
 
 ## 9. Exploratory (not confirmatory)
 

@@ -73,6 +73,18 @@ El portugués queda como **trabajo futuro**, y es barato de agregar: el brazo A 
 se comparte entre idiomas, así que una v0.2 solo necesita los brazos B y C sobre MASSIVE y
 Belebele.
 
+## Dos caminos de acceso
+
+```bash
+acento run --provider typesafe    # directo; fija la versión del modelo
+acento run --provider gateway     # Gateway de Vercel; sin waitlist
+```
+
+Los dos hablan exactamente el mismo formato nativo. Para la auditoría conviene el directo, porque
+es el único que informa qué versión del modelo respondió. El camino por Gateway se mantiene para
+que el trabajo sea reproducible sin una cuenta aprobada de TypeSafe. Comparación completa en
+[`docs/providers.md`](docs/providers.md).
+
 ## Usarlo con tus propios datos
 
 La auditoría es un uso del harness. El otro es comparar **tus** redacciones de preguntas sobre
@@ -109,6 +121,7 @@ manifiestos, `make check-prereg` reporta correctamente que no hay nada registrad
 se niega a escribir en `runs/`.
 
 ```bash
+acento smoke --provider typesafe   # verificar un proveedor antes de confiarle una corrida
 make check-prereg   # verificar que los prompts y el pre-registro siguen hasheando igual
 make test           # métricas sobre datos sintéticos, runner contra la API falsa, freeze
 make dry-run        # pipeline completo, sin red y sin gasto
@@ -120,11 +133,12 @@ make reproduce      # regenerar results.* y figures/ de forma determinística de
 
 La lista completa va en [`results.md`](results.md) cuando salga la corrida. Las que ya se conocen:
 
-- **No se puede fijar la versión del modelo.** El Gateway rechaza ids versionados
-  (`typesafe-ai/jev-1.13.0` → 404) y devuelve `model: "typesafe-ai/jev"`. Por eso cada llamada
-  registra su timestamp y su `generationId`, y cada corrida guarda el `release_date` que el
-  proveedor publica. Un cambio silencioso de modelo a mitad de corrida no se puede descartar del
-  todo, solo detectar.
+- **Fijar la versión del modelo depende del proveedor.** Por la API **directa** de TypeSafe,
+  cada fila registra la versión que respondió (`jev-1.13.0`) y la corrida queda anclada. Por el
+  **Gateway de Vercel** no: rechaza ids versionados (`typesafe-ai/jev-1.13.0` → 404) y devuelve
+  el alias `typesafe-ai/jev`, así que un cambio silencioso de modelo a mitad de corrida solo se
+  puede detectar, no descartar. El `results.md` declara cuál de los dos casos aplicó, leyéndolo
+  de las filas y no de la configuración. Ver [`docs/providers.md`](docs/providers.md).
 - **Una sola redacción por celda** es una muestra de tamaño 1 del espacio de redacciones.
 - **Score queda fuera** de la v0.1: no hay dataset ordinal paralelo adecuado.
 - **MASSIVE es es-ES**, no rioplatense.

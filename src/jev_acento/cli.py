@@ -40,7 +40,12 @@ from .data import (
     stratified_sample,
 )
 from .figures import make_all
-from .providers import PROVIDERS, JevClient
+from .providers import (
+    PROVIDERS,
+    JevClient,
+    fetch_model_release_date,
+    is_versioned_model_id,
+)
 from .questions import validate_prompt_set
 from .run import REPO_ROOT, FakeJev, RunConfig, execute, iter_rows
 
@@ -176,6 +181,71 @@ def cmd_reproduce(args: argparse.Namespace) -> int:
     """Regenerate every published artefact from ``runs/``, deterministically."""
     rc = cmd_analyse(args)
     return rc or cmd_figures(args)
+
+
+def cmd_smoke(args: argparse.Namespace) -> int:
+    """Check what a provider actually returns, before trusting it with a real run.
+
+    Makes three cheap calls -- one Choice, one Noul, and a model listing -- and prints the facts
+    the audit depends on: whether the response pins a model version, whether Noul carries a
+    confidence field, whether per-call cost is reported, and what the round trip costs. This is
+    the Phase 0 smoke test, kept runnable rather than written down once.
+    """
+    provider = PROVIDERS[args.provider]
+    print(f"provider: {provider.name}  ({provider.endpoint})")
+    print(f"model sent: {provider.model}\n")
+
+    async def go() -> int:
+        client = JevClient(provider, max_usd=args.max_usd)
+        try:
+            try:
+                listing = await fetch_model_release_date(provider)
+                print(f"  models endpoint : {listing}")
+            except Exception as exc:
+                print(f"  models endpoint : unavailable ({exc})")
+
+            choice = await client.ask(
+                {"premise": "A man inspects a uniform.", "hypothesis": "The man is asleep."},
+                {"nli": {"type": "choice",
+                         "instructions": "Decide what the `premise` establishes about the "
+                                         "`hypothesis`.",
+                         "criteria": {
+                             "entailment": "The `hypothesis` must be true.",
+                             "neutral": "The `hypothesis` may be true or false.",
+                             "contradiction": "The `hypothesis` cannot be true."}}},
+            )
+            noul = await client.ask(
+                {"sentence_1": "Two students founded it in 1998.",
+                 "sentence_2": "It was founded in 1998 by two students."},
+                {"paraphrase": {"type": "noul",
+                                "instructions": "Do `sentence_1` and `sentence_2` state the "
+                                                "same facts?"}},
+            )
+        except Exception as exc:
+            print(f"\nFAILED: {exc}", file=sys.stderr)
+            await client.aclose()
+            return 1
+
+        c, n = choice.answers["nli"], noul.answers["paraphrase"]
+        pinned = is_versioned_model_id(choice.model)
+        print(f"\n  choice          : {c.pred} p_max={c.p_max} confidence={c.confidence}")
+        print(f"  noul            : {n.pred} p_max={n.p_max} confidence={n.confidence}")
+        print(f"  model reported  : {choice.model!r}")
+        print(f"  VERSION PINNED  : {'YES' if pinned else 'NO — this is an alias'}")
+        print(f"  generation_id   : {choice.generation_id}")
+        print(f"  input_tokens    : {choice.input_tokens} (choice), "
+              f"{noul.input_tokens} (noul)")
+        print(f"  cost reported   : {choice.cost_usd:.9f} USD")
+        print(f"  latency         : {choice.latency_ms:.0f} ms, {noul.latency_ms:.0f} ms")
+        print(f"\n  total spent     : {client.spent_usd:.6f} USD over {client.calls} calls")
+
+        if provider.reports_version and not pinned:
+            print("\n  WARNING: this provider is expected to report a versioned model id but "
+                  "did not.", file=sys.stderr)
+        await client.aclose()
+        return 0
+
+    return asyncio.run(go())
 
 
 # --------------------------------------------------------------------------------------------
@@ -475,7 +545,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     def add_api(p: argparse.ArgumentParser) -> None:
         p.add_argument("--provider", choices=sorted(PROVIDERS), default="gateway")
-        p.add_argument("--rpm", type=int, default=600, help="pacer target, requests per minute")
+        p.add_argument("--rpm", type=int, default=None,
+                       help="pacer target in requests per minute "
+                            "(default: the provider's own limit — gateway 600, typesafe 1200)")
         p.add_argument("--concurrency", type=int, default=8)
         p.add_argument("--max-usd", type=float, default=5.0, help="hard spend cap")
         p.add_argument("--dry-run", action="store_true",
@@ -512,6 +584,16 @@ def build_parser() -> argparse.ArgumentParser:
         p.add_argument("--run-id", default=None, help="defaults to the most recent run")
         add_common(p)
         p.set_defaults(func=fn)
+
+    p_smoke = sub.add_parser(
+        "smoke",
+        help="check what a provider actually returns (3 cheap calls)",
+        description="Verify a provider before trusting it with a real run: response shape, "
+                    "whether the model version is pinned, token counts and cost.",
+    )
+    p_smoke.add_argument("--provider", choices=sorted(PROVIDERS), default="gateway")
+    p_smoke.add_argument("--max-usd", type=float, default=0.01)
+    p_smoke.set_defaults(func=cmd_smoke)
 
     p_cmp = sub.add_parser(
         "compare",

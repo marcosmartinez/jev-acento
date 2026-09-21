@@ -145,7 +145,8 @@ class RunConfig:
     arms: tuple[str, ...] = tuple(ARMS)
     passes: int = 2
     seed: int = 20260920
-    rpm: int = 600
+    rpm: int | None = None
+    """Pacer target. ``None`` means use the provider's own documented limit."""
     concurrency: int = 8
     max_usd: float = 5.0
     dry_run: bool = False

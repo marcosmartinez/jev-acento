@@ -12,6 +12,7 @@ from jev_acento.providers import (
     PROVIDERS,
     CostCapExceeded,
     JevClient,
+    is_versioned_model_id,
     parse_answer,
     parse_response,
 )
@@ -206,3 +207,70 @@ def test_direct_provider_uses_a_versioned_model_id():
     """The Gateway cannot pin a version; the direct provider must, so it does."""
     assert PROVIDERS["typesafe"].model == "jev-1.13.0"
     assert PROVIDERS["gateway"].model == "typesafe-ai/jev"
+
+
+def test_only_the_direct_provider_claims_to_report_a_version():
+    assert PROVIDERS["typesafe"].reports_version is True
+    assert PROVIDERS["gateway"].reports_version is False
+
+
+def test_provider_default_rates_match_the_documented_limits():
+    assert PROVIDERS["typesafe"].default_rpm == 1200   # documented by TypeSafe
+    assert PROVIDERS["gateway"].default_rpm == 600     # undocumented; a conservative guess
+
+
+def test_endpoints_are_built_correctly_for_both_paths():
+    assert PROVIDERS["typesafe"].endpoint == "https://api.typesafe.ai/v1/systemone"
+    assert PROVIDERS["typesafe"].models_endpoint == "https://api.typesafe.ai/v1/models"
+    assert PROVIDERS["gateway"].endpoint == (
+        "https://ai-gateway.vercel.sh/typesafe/v1/systemone"
+    )
+
+
+@pytest.mark.parametrize(
+    ("model", "pinned"),
+    [
+        ("jev-1.13.0", True),
+        ("typesafe-ai/jev-1.13.0", True),
+        ("typesafe-ai/jev", False),
+        ("jev-latest", False),
+        ("jev-preview", False),
+        ("", False),
+    ],
+)
+def test_version_pin_detection(model: str, pinned: bool):
+    assert is_versioned_model_id(model) is pinned
+
+
+def test_overloaded_is_retryable():
+    """TypeSafe documents 529 alongside 429 as a back-off-and-retry status."""
+    assert 529 in JevClient.RETRY_STATUSES
+    assert 429 in JevClient.RETRY_STATUSES
+    assert 400 not in JevClient.RETRY_STATUSES, "a malformed request stays malformed"
+
+
+def test_pacer_defaults_to_the_provider_rate(monkeypatch):
+    monkeypatch.setenv("TYPESAFE_API_KEY", "test-key-not-real")
+    client = JevClient(PROVIDERS["typesafe"])
+    assert client.pacer.min_interval == pytest.approx(60.0 / 1200)
+    asyncio.run(client.aclose())
+
+
+def test_explicit_rpm_overrides_the_provider_default(monkeypatch):
+    monkeypatch.setenv("TYPESAFE_API_KEY", "test-key-not-real")
+    client = JevClient(PROVIDERS["typesafe"], rpm=120)
+    assert client.pacer.min_interval == pytest.approx(0.5)
+    asyncio.run(client.aclose())
+
+
+def test_direct_path_has_no_gateway_metadata_and_still_accounts_correctly():
+    """The direct API returns no provider_metadata, so cost falls back to the list price."""
+    body = {
+        "model": "jev-1.13.0",
+        "answers": {"q": {"type": "noul", "noul": 0.9}},
+        "usage": {"input_tokens": 500, "output_tokens": 20},
+    }
+    resp = parse_response(body, latency_ms=30.0)
+    assert resp.model == "jev-1.13.0"
+    assert resp.generation_id is None, "no generationId outside the Gateway"
+    assert resp.cost_usd == pytest.approx(500 * 0.042 / 1_000_000)

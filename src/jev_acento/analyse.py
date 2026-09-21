@@ -37,6 +37,7 @@ import numpy as np
 
 from . import metrics as M
 from .data import SPECS
+from .providers import is_versioned_model_id
 from .questions import ARMS
 
 # Pre-registered thresholds. Matched to the Russian audit so the two are comparable.
@@ -397,7 +398,48 @@ def analyse(
             )
 
     results.checks = _inherited_checks(cells)
+    results.checks["model_provenance"] = model_provenance(rows)
+
+    provenance = results.checks["model_provenance"]
+    if provenance["status"] == "mixed":
+        results.warnings.append(
+            f"MIXED MODEL IDS across rows: {provenance['models']}. The arms were not all "
+            f"answered by the same model, so they are not comparable. Discard this run."
+        )
+    elif provenance["status"] == "unpinned":
+        results.warnings.append(
+            f"MODEL NOT PINNED: every row reports the alias {provenance['model']!r}, which "
+            f"carries no version. Re-running against the `typesafe` provider would pin it."
+        )
     return results
+
+
+def model_provenance(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    """What the rows themselves prove about which model answered them.
+
+    The `model` field is echoed by the API per call, so this is evidence rather than
+    configuration. Three outcomes matter:
+
+    * **pinned** -- every row names one versioned model (``jev-1.13.0``). The run is anchored,
+      and the "no version pin" limitation does not apply to it.
+    * **unpinned** -- every row names an alias (``typesafe-ai/jev``). A silent model change
+      cannot be ruled out; only the per-row timestamp and ``generation_id`` bound it.
+    * **mixed** -- more than one model id appears. Either the run spans a model change or it
+      mixes providers. Either way the arms are not comparable and the run must be discarded.
+    """
+    seen = sorted({str(r.get("model", "")) for r in rows if r.get("model")})
+    if not seen:
+        return {"status": "unknown", "models": [], "pinned": False}
+    if len(seen) > 1:
+        return {"status": "mixed", "models": seen, "pinned": False}
+    only = seen[0]
+    pinned = is_versioned_model_id(only)
+    return {
+        "status": "pinned" if pinned else "unpinned",
+        "models": seen,
+        "pinned": pinned,
+        "model": only,
+    }
 
 
 def _inherited_checks(cells: dict[tuple[str, str, int], Cell]) -> dict:
@@ -534,6 +576,21 @@ def render_markdown(results: Results) -> str:
         f"**{checks.get('n_choice_disagrees_with_argmax', 0)}** answers "
         f"(2-decimal rounding produces ties; argmax is used throughout).",
     ]
+    prov = checks.get("model_provenance", {})
+    if prov:
+        if prov.get("pinned"):
+            out.append(
+                f"- **Model pinned:** every row was answered by `{prov['model']}`, a versioned "
+                f"id. This run is anchored to one specific model."
+            )
+        elif prov.get("status") == "unpinned":
+            out.append(
+                f"- **Model NOT pinned:** every row reports the alias `{prov['model']}`. The "
+                f"version that answered is unknown; only timestamps and generation ids bound it."
+            )
+        elif prov.get("status") == "mixed":
+            out.append(f"- **Mixed model ids:** {prov['models']} — this run is not comparable.")
+
     formula = checks.get("confidence_formula", {})
     if formula:
         worst = max(

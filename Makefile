@@ -59,9 +59,13 @@ freeze:
 check-prereg:
 	$(ACENTO) check-prereg
 
-# Requires AI_GATEWAY_API_KEY. Put it in .env (gitignored) and it is picked up here.
+# Requires a key for whichever provider you choose: AI_GATEWAY_API_KEY for the Gateway
+# (default) or TYPESAFE_API_KEY for the direct path. Put it in .env; see .env.example.
+# Override the provider with: make run PROVIDER=typesafe
+PROVIDER ?= gateway
+
 run: check-prereg
-	@set -a; [ -f .env ] && . ./.env; set +a; $(ACENTO) run
+	@set -a; [ -f .env ] && . ./.env; set +a; $(ACENTO) run --provider $(PROVIDER)
 
 reproduce:
 	$(ACENTO) reproduce

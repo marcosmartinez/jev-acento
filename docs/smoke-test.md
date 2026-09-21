@@ -79,6 +79,32 @@ every arm, they belong to the overhead, not to the text — so the state-only to
 computed against the empty-*fields* baseline. Using `{}` would have biased every ratio in the
 same direction.
 
+## The direct path
+
+Verified against the TypeSafe documentation on 2026-09-20, **not yet against a live key**. The
+contract is identical where it matters and differs in three ways that the code handles:
+
+| | Gateway | Direct |
+|---|---|---|
+| Endpoint | `…/typesafe/v1/systemone` | `https://api.typesafe.ai/v1/systemone` |
+| `model` echoed in the response | `typesafe-ai/jev` (alias) | `jev-1.13.0` (the version that answered) |
+| `provider_metadata` | present | **absent** — so no `marketCost` and no `generationId` |
+| Documented rate limit | none published | 1200 rpm / 250k tokens per second |
+| Retryable statuses | 429, 5xx | 429, 5xx, **529 Overloaded** |
+
+The docs list `jev-1.13.0` as the versioned id, with `jev-latest` and `jev-preview` as aliases
+that currently point to it. Every response example in the API reference shows `jev-1.13.0` even
+where the request used `jev-latest`, which is what makes the direct path capable of pinning a
+run: the API tells you which version answered rather than repeating the name you asked for.
+
+Context limits, restated precisely from the docs: 64k tokens per request covering state plus all
+questions, and 32k for the state plus **the single longest question** — slightly tighter than
+"32k for the state" alone.
+
+**Still to verify against a live key:** that `jev-1.13.0` is accepted as sent, that the response
+echoes it, whether any rate-limit headers are returned, and whether the account's quota allows
+the roughly 19,200 calls the full audit needs.
+
 ## Inherited check, first data point
 
 `confidence ≈ (k · p_max − 1) / (k − 1)`: with k = 3 and p_max = 0.99 the formula gives 0.985,

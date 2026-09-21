@@ -128,4 +128,4 @@ def test_parser_exposes_every_documented_subcommand():
     actions = [a for a in parser._actions if hasattr(a, "choices") and a.choices]
     names = set(actions[0].choices)
     assert names == {"sample", "freeze", "check-prereg", "run", "analyse", "figures",
-                     "reproduce", "compare"}
+                     "reproduce", "compare", "smoke"}
