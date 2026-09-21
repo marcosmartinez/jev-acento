@@ -233,6 +233,20 @@ make verify         # the full pre-publication gate: freeze, tests, secret scan,
 - **A single run.** Stability was measured *within* this run (two passes, ~20 minutes apart).
   Nothing here bounds how much Jev's Spanish behaviour drifts between model versions.
 
+## How this was built
+
+The design, the scope and every methodological decision here are mine. Much of the code was
+written with a coding agent.
+
+That is stated up front rather than left to be discovered — and it is also the reason this repo
+leans on things that do not require trusting its author: a pre-registration frozen by hash
+before the first real call, with a runner that refuses to write results if it changes; ECE
+reported against a simulated noise floor rather than in isolation; a stability gate checked
+before any result was interpreted; and `make verify`, which regenerates every published number
+and both figures byte-identical from the committed raw rows, with no network access.
+
+Check the claims, not the authorship.
+
 ## Licence
 
 MIT, for both the code and the derived rows in `runs/`. See [`THIRD_PARTY.md`](THIRD_PARTY.md)

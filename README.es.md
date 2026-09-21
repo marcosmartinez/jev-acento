@@ -233,6 +233,20 @@ make verify         # el gate completo: freeze, tests, scan de secretos, reprodu
   minutos de diferencia). Nada acá acota cuánto se mueve el comportamiento de Jev en español
   entre versiones del modelo.
 
+## Cómo se construyó esto
+
+El diseño, el alcance y cada decisión metodológica son míos. Buena parte del código se escribió
+con un agente de programación.
+
+Lo digo de entrada en vez de dejar que se descubra — y es también la razón por la que este repo
+se apoya en cosas que no requieren confiar en su autor: un pre-registro congelado por hash antes
+de la primera llamada real, con un runner que se niega a escribir resultados si cambia; el ECE
+reportado contra un piso de ruido simulado y no en el aire; un gate de estabilidad verificado
+antes de interpretar cualquier resultado; y `make verify`, que regenera cada número publicado y
+las dos figuras byte a byte desde las filas crudas commiteadas, sin acceso a la red.
+
+Verificá las afirmaciones, no la autoría.
+
 ## Licencia
 
 MIT, tanto para el código como para las filas derivadas en `runs/`. Ver
